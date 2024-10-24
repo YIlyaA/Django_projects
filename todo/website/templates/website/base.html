@@ -1,0 +1,44 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do Application</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}" />
+    <link rel="stylesheet" href="{% static 'css/notifications.css' %}" />
+    <script src="{% static 'js/notifications.js' %}"></script>
+  </head>
+  <body>
+    <div>
+      <nav class="top-nav">
+        <ul>
+          <li><a href="{% url "website:index" %}" class="styled-button active">To-Do</a></li>
+          <li><form action="{% url 'users:logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="styled-button" onclick="confirmLogout(event)">Logout</button>
+              </form>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    {% include "includes/notifications.html" %}
+
+    {% block content %}{% endblock content %}
+  </body>
+  <script>
+    function confirmLogout(event) {
+        event.preventDefault();
+        let userConfirmed = confirm("Are you sure you want to logout?");
+        if (userConfirmed) {
+          const href = event.target.href || '/login/'; 
+          window.location.href = href;
+        } else {
+          event.preventDefault();
+        }
+    }
+  </script>
+
+</html>

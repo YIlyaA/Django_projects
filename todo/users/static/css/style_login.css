@@ -1,0 +1,128 @@
+/* styles.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: #78c1f3;  
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background: #ffffff; 
+    padding: 25px;
+    width: 400px;  
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.todo-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;  
+}
+
+.todo-body input {
+    padding: 15px;
+    border: 1px solid #ccc; 
+    border-radius: 30px;
+    width: 100%;
+}
+
+/* css for submit button */
+.submit-button {
+    background-color: limegreen; 
+    border: none;
+    border-radius: 30px;  
+    padding: 10px 20px;   
+    color: white;          
+    font-size: 16px;      
+    cursor: pointer;       
+    transition: background 0.3s; 
+    width: 100%; 
+}
+
+.submit-button:hover {
+    background-color: darkgreen;
+}
+
+/* css for link to register page */
+.register-link {
+    font-size: 14px;
+    color: #6a5acd;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.register-link:hover {
+    color: #483d8b;
+    text-decoration: underline;
+}
+
+/* css for back button register page */
+.back-button {
+    font-size: 10px;
+    color: white;
+    background-color: #2e87fb;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    width: 100px;
+    margin-top: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #006eff; 
+}
+
+.back-button:focus {
+    outline: none; 
+}
+
+.back-button:active {
+    background-color: #006eff;
+    box-shadow: 0 1px #666;
+    transform: translateY(1px);
+}
+
+
+
+/* css for errors */
+.error-message {
+    color: #f44336;  /* Красный цвет для ошибок */
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.email-input, .password-input, .username-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+

@@ -1,0 +1,50 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="todo-header">
+        <h2>LOGIN</h2>
+        <img src="{% static 'img/user.png' %}" height="50px" />
+    </div>
+    <form class="todo-body" action="{% url 'users:login' %}" method="post">
+        {% csrf_token %}
+
+        <div class="input-group">
+            <input
+                type="email"
+                id="id_email"
+                name="username"
+                class="email-input"
+                placeholder="Email"
+                required
+            />
+            {% if form.email.errors %}
+            <div class="error-message">
+                {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="input-group">
+            <input
+                type="password"
+                id="id_password"
+                name="password"
+                class="password-input"
+                placeholder="Password"
+                required
+            />
+            {% if form.password.errors %}
+            <div class="error-message">
+                {% for error in form.password.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <a href="{% url 'users:register' %}" class="register-link">Don't have an account? Register</a>
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+{% endblock content %}
+ 

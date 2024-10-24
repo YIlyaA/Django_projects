@@ -1,0 +1,38 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <div class="todo-header">
+      <h2>ToDo List</h2>
+      <img src="{% static "img/to-do-list.png" %}" height="50px" />
+      </div>
+    <div class="todo-body">
+        <input
+            type="text"
+            id="todoText"
+            class="todo-input"
+            placeholder="Add your items"
+        />
+        <img
+            src="{% static "img/plus.png" %}"
+            alt="+"
+            id="AddUpdateClick"
+            onclick="CreateToDoItems();"
+        />
+        </div>
+
+        <h5 id="Alert"></h5>
+        <ul id="list-items" class="list-items"></ul>
+        {% comment %} {% for item in items %}
+          <li>
+            <div {% if item.status %}style="text-decoration: line-through"{% endif %}>{{ item.item }}</div>
+            <div>
+              <a href="{% url 'update_todo_item' item.pk %}">Edit</a>
+              <a href="{% url 'delete_todo_item' item.pk %}">Delete</a>
+            </div>
+          </li>
+        {% endfor %} {% endcomment %}
+        
+  </div>
+{% endblock content %}

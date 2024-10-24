@@ -1,0 +1,30 @@
+/* css for notifications */
+/* Popup message styling */
+.popup-message {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50; /* Green for success */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 1000;
+    opacity: 0.9;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Hide the list of messages in the form */
+.hidden {
+    display: none;
+}
+
+/* Adjust the notification styles if needed */
+.popup-message.error {
+    background-color: #f44336; /* Red for errors */
+}
+
+.popup-message:hover {
+    opacity: 1; /* Make it fully opaque on hover */
+}
