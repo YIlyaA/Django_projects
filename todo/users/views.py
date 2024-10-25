@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
 from .models import CustomUser
@@ -28,6 +29,7 @@ class UserLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
     template_name = 'users/login.html'
 
+
     def get_success_url(self):
         return reverse_lazy('website:index')
     
@@ -42,9 +44,10 @@ class UserLoginView(LoginView):
 
 class CustomLogoutView(LogoutView):
 
+    def get_success_url(self):
+        return reverse_lazy('users:login')
+    
     def dispatch(self, request, *args, **kwargs):
         messages.success(request, "Successfully logged out.")
         return super().dispatch(request, *args, **kwargs)
  
-    def get_success_url(self):
-        return reverse_lazy('users:login')

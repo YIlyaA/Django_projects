@@ -4,5 +4,7 @@ from website import views
 app_name = "website"
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name="index"),
+    path('', views.ItemsView.as_view(), name="index"),
+    path('delete/<int:pk>', views.DeleteItem.as_view(), name="delete"),
+    path('update/<int:pk>', views.UpdateItem.as_view(), name="update"),
 ]
