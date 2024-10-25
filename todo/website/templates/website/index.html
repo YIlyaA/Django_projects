@@ -21,13 +21,31 @@
       <h5 id="Alert"></h5>
       <ul id="list-items" class="list-items"></ul>
       {% for item in items %}
+      
         <li style="display: flex; justify-content: space-between; align-items: center;">
           <div style="word-wrap: break-word; width: 80%; padding-left: 10px; {% if item.status %}text-decoration: line-through;{% endif %}">
             {{ item.description }}
           </div>
           <div style="display: flex; gap: 10px;">
-            <a href="{% url "website:update" item.id %}"><img src="{% static "img/pen.png" %}" style="width: 25px; height: auto; margin-top: 5px;"/></a>
-            <a href="{% url "website:delete" item.id %}"><img src="{% static "img/garbage.png" %}" style="width: 27px; height: auto; margin-right: 5px; margin-top: 5px;"/></a>
+
+            {% comment %} <a href="{% url "website:update" item.id %}"><img src="{% static "img/pen.png" %}" style="width: 25px; height: auto; margin-top: 5px;"/></a> {% endcomment %}
+            <form id="todo-form" method="post" action="{% url 'website:update' item.id %}">
+              {% csrf_token %}
+              <button type="submit" style="background: none; border: none">
+                <img src="{% static 'img/pen.png' %}" style="width: 27px; height: auto; margin-right: 5px; margin-top: 5px;"/>
+              </button>
+            </form>
+
+
+            <form id="todo-form" method="post" action="{% url 'website:delete' item.id %}">
+              {% csrf_token %}
+              <button type="submit" style="background: none; border: none;" onclick="confirmDelete(event)">
+                <img src="{% static 'img/garbage.png' %}" style="width: 27px; height: auto; margin-right: 5px; margin-top: 5px;"/>
+              </button>
+            </form>
+
+            <a href="#"><img src="{% static "img/confirm.png" %}" style="width: 25px; height: auto; margin-top: 5px;"/></a>
+
           </div>
         </li>
       {% endfor %}
@@ -35,37 +53,13 @@
         
   </div>
   <script>
-    // Добавление нового элемента через AJAX
-    document.getElementById('todo-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-  
-      fetch("{% url 'website:index' %}", {
-        method: "POST",
-        body: formData,
-        headers: {
-          "X-Requested-With": "XMLHttpRequest",
-          "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.errors) {
-          console.log(data.errors);
-        } else {
-          // Используем новый id для создания правильных ссылок на редактирование и удаление
-          const newItem = `
-            <li id="item-${data.id}" style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="word-wrap: break-word; width: 80%; padding-left: 10px;">${data.description}</div>
-              <div style="display: flex; gap: 10px;">
-                <a href="/main/update/${data.id}"><img src="{% static "img/pen.png" %}" style="width: 25px; height: auto; margin-top: 5px;" /></a>
-                <a href="/main/delete/${data.id}"><img src="{% static "img/garbage.png" %}" style="width: 27px; height: auto; margin-right: 5px; margin-top: 5px;" /></a>
-              </div>
-            </li>`;
-          document.getElementById('list-items').insertAdjacentHTML('beforeend', newItem);
-        }
-      });
-    });
+    function confirmDelete(event) {
+        // Show confirmation prompt
+      if (!confirm("Are you sure you want to delete this item?")) {
+        // If the user cancels, prevent the form from submitting
+        event.preventDefault();
+      }
+    }
   </script>
-  <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="{% static "js/script.js" %}"></script>
 {% endblock content %}

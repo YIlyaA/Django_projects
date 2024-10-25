@@ -1,3 +1,4 @@
+import json
 from typing import Any, Dict
 from django.views.generic import UpdateView
 from django.views.generic.edit import DeleteView
@@ -48,17 +49,15 @@ class DeleteItem(LoginRequiredMixin, DeleteView):
 
 class UpdateItem(LoginRequiredMixin, UpdateView):
     model = ToDoItems
-    form_class = ToDoItemForm
     success_url = reverse_lazy('website:index')
 
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
+        form = ToDoItemForm(request.POST)
         if form.is_valid():
-            form.save()
-            if request.is_ajax():
-                return JsonResponse({
-                    'description': self.object.description,
-                    'id': self.object.id
-                })
-        return JsonResponse({'errors': form.errors}, status=400)
+            item = form.save(commit=False)
+            item.user = self.request.user
+            item.save()
+
+            return HttpResponseRedirect(self.success_url)
+        else:
+            return self.form_invalid(form)
