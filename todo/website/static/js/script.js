@@ -47,7 +47,6 @@ function saveItem(itemId) {
                 document.getElementById(`save-button-${itemId}`).style.display = 'none';
                 document.getElementById(`back-button-${itemId}`).style.display = 'none';
                 document.getElementById(`delete-button-${itemId}`).style.display = 'inline';
-                alert("Item saved successfully");
             } else {
                 alert('Error updating item');
             }
@@ -82,3 +81,51 @@ function confirmDelete(event) {
         event.preventDefault();
     }
 }
+
+function confirmLogout(event) {
+    // Show the confirmation dialog
+    if (!confirm("Are you sure you want to logout?")) {
+        // If the user clicks "Cancel," prevent the form submission
+        event.preventDefault();
+    } else {
+        // Otherwise, submit the form if they clicked "OK"
+        document.getElementById('logout-form').submit();
+    }
+}
+
+
+function toggleComplete(itemId) {
+    const checkbox = document.querySelector(`#item-${itemId} .completed-checkbox`);
+    const status = checkbox.checked;
+
+    // Toggle UI immediately
+    const itemElement = document.getElementById(`item-${itemId}`);
+    if (status) {
+        itemElement.classList.add("completed");
+        document.getElementById(`edit-button-${itemId}`).style.display = "none";
+    } else {
+        itemElement.classList.remove("completed");
+        document.getElementById(`edit-button-${itemId}`).style.display = "inline-block";
+    }
+
+    // Send the status update to the server
+    fetch(`/main/update-status/${itemId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({ 'status': status })        
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            alert('Failed to update status');
+            checkbox.checked = !status; // Revert checkbox if update failed
+        }
+    })
+    .catch(error => console.error('Error updating status:', error));
+}
+
+

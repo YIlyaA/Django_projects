@@ -1,6 +1,5 @@
-from django.contrib.auth import login
-from django.shortcuts import redirect
-from django.urls import reverse_lazy, reverse
+# from django.contrib.auth import login
+from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .models import CustomUser
 from django.contrib import messages
@@ -15,14 +14,15 @@ class UserRegistrationView(RedirectAuthenticatedUserMixin, CreateView):
     success_url = reverse_lazy('users:login')       # success url
 
     def form_valid(self, form):
-        form.save()                # save the form 
-        # login(self.request, user)  # login user without login again 
+        form.save()          # save the form 
+        # user = form.save()                  # save the form for user
+        # login(self.request, user)           # if you want login user without login again 
         messages.success(self.request, 'Registration successful. Please log in.')
         return super().form_valid(form)
     
     def form_invalid(self, form):
         messages.error(self.request, 'Invalid registrations credentials. Please try again.')
-        return self.render_to_response(self.get_context_data(form=form))
+        return super().form_invalid(form)
     
 
 class UserLoginView(RedirectAuthenticatedUserMixin, LoginView):
@@ -42,12 +42,10 @@ class UserLoginView(RedirectAuthenticatedUserMixin, LoginView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-# class CustomLogoutView(LogoutView):
+class CustomLogoutView(LogoutView):
+    def get_success_url(self):
+        return reverse_lazy('users:login')  # Redirects to the login page after logout
 
-#     def get_success_url(self):
-#         return reverse_lazy('users:login')
-    
-#     def dispatch(self, request, *args, **kwargs):
-#         messages.success(request, "Successfully logged out.")
-#         return super().dispatch(request, *args, **kwargs)
- 
+    def dispatch(self, request, *args, **kwargs):
+        messages.success(request, "Successfully logged out.")
+        return super().dispatch(request, *args, **kwargs)

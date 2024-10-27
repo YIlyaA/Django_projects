@@ -1,61 +1,72 @@
-{% extends "website/base.html" %}
+{% extends 'website/base.html' %}
 {% load static %}
 
 {% block content %}
   <div class="container">
     <div class="todo-header">
       <h2>ToDo List</h2>
-      <img src="{% static "img/to-do-list.png" %}" height="50px" />
+      <img src="{% static 'img/to-do-list.png' %}" height="50px" />
+    </div>
+    <form id="todo-form" method="post" action="{% url 'website:index' %}">
+      {% csrf_token %}
+
+      <div class="todo-body">
+        <input type="text" id="todoText" name="description" class="todo-input" placeholder="Add your items" />
+        <div id="error-message" style="color: red; display: none;">Please enter a description.</div>
+        <button class="buttons" type="submit" id="add-item" style="background: none; border: none;"><img src="{% static 'img/plus.png' %}" alt="+" /></button>
       </div>
-      <form id="todo-form" method="post" action="{% url 'website:index' %}">
-        {% csrf_token %}
-        <div class="todo-body">
-            <input type="text" id="todoText" name="description" class="todo-input" placeholder="Add your items" />
-            <button  class="buttons" type="submit" id="add-item" style="background: none; border: none;">
-                <img src="{% static 'img/plus.png' %}" alt="+" />
-            </button>
-        </div>
-      </form>
+    </form>
 
-
-      <h5 id="Alert"></h5>
-      <ul id="list-items" class="list-items"></ul>
-      {% for item in items %}
-      
-        <li style="display: flex; justify-content: space-between; align-items: center;">
-          <div style="word-wrap: break-word; width: 80%; padding-left: 10px;">
+    <ul id="list-items" class="list-items"></ul>
+    {% for item in items %}
+    <li id="item-{{ item.id }}" class="list-item {% if item.status %}completed{% endif %}" style="display: flex; justify-content: space-between; align-items: center; padding: 5px;">
+      <div style="display: flex; align-items: center;">
+        <!-- Checkbox -->
+        <input type="checkbox" class="completed-checkbox" {% if item.status %}checked{% endif %} onclick="toggleComplete({{ item.id }})">
+        
+        <!-- Description -->
+        <div id="description-container-{{ item.id }}" style="margin-left: 10px;">
             <span id="description-text-{{ item.id }}">{{ item.description }}</span>
             <input type="text" id="description-input-{{ item.id }}" value="{{ item.description }}" class="edit-input" style="display:none;" />
-          </div>
+        </div>
+      </div>
 
+      <div class="action-buttons" style="display: flex; gap: 10px;">
+        <!-- Edit button (will be hidden when editing) -->
+        <button href="#" class="buttons" id="edit-button-{{ item.id }}" style="{% if item.status %}display:none;{% endif %}" onclick="editItem({{ item.id }}); return false;">
+          <img src="{% static 'img/pen.png' %}" style="width: 25px; height: auto; margin-top: 5px;" />
+        </button>
+        <!-- Save button (hidden initially) -->
+        <button id="save-button-{{ item.id }}" class="save-button buttons" onclick="saveItem({{ item.id }}); return false;" style="display:none;"><img src="{% static 'img/confirm.png' %}" style="width: 25px; height: auto; margin-top: 5px;" /></button>
 
-          <div style="display: flex; gap: 10px;">
-          <!-- Edit button (will be hidden when editing) -->
-          <button href="#" class="buttons" id="edit-button-{{ item.id }}" onclick="editItem({{ item.id }}); return false;">
-            <img src="{% static 'img/pen.png' %}" style="width: 25px; height: auto; margin-top: 5px;" />
-          </button>
+        <!-- Cancel button (hidden initially) -->
+        <button href="#" id="back-button-{{ item.id }}" class="buttons" onclick="cancelEdit({{ item.id }}); return false;" style="display:none;"><img src="{% static 'img/cancel.png' %}" style="width: 25px; height: auto; margin-top: 5px;" /></button>
 
-          <!-- Save button (hidden initially) -->
-          <button id="save-button-{{ item.id }}" class="save-button buttons" onclick="saveItem({{ item.id }}); return false;" style="display:none;">
-            <img src="{% static 'img/confirm.png' %}" style="width: 25px; height: auto; margin-top: 5px;" />
-          </button>
-
-          <!-- Cancel button (hidden initially) -->
-          <button href="#" id="back-button-{{ item.id }}" class="buttons" onclick="cancelEdit({{ item.id }}); return false;" style="display:none;">
-            <img src="{% static 'img/cancel.png' %}" style="width: 25px; height: auto; margin-top: 5px;" />
-          </button>
-
-          <!-- Delete button -->
-          <form id="delete-form-{{ item.id }}" method="post" action="{% url 'website:delete' item.id %}">
-            {% csrf_token %}
-            <button type="submit" class="buttons" style="background: none; border: none;" onclick="confirmDelete(event)" id="delete-button-{{ item.id }}">
-              <img src="{% static 'img/garbage.png' %}" style="width: 27px; height: auto; margin-right: 5px; margin-top: 5px;" />
-            </button>
-          </form>
-            </li>
-          {% endfor %}
-
-        
+        <!-- Delete button -->
+        <form id="delete-form-{{ item.id }}" method="post" action="{% url 'website:delete' item.id %}">
+          {% csrf_token %}
+          <button type="submit" class="buttons" style="background: none; border: none;" onclick="confirmDelete(event)" id="delete-button-{{ item.id }}"><img src="{% static 'img/garbage.png' %}" style="width: 27px; height: auto; margin-right: 5px; margin-top: 5px;" /></button>
+        </form>
+      </div>
+    </li>
+    {% endfor %}
   </div>
-  <script type="text/javascript" src="{% static "js/script.js" %}"></script>
-{% endblock content %}
+  <script>
+    document.getElementById('todo-form').addEventListener('submit', function (event) {
+      const descriptionInput = document.getElementById('todoText') // Changed to match the id in HTML
+      const errorMessage = document.getElementById('error-message')
+    
+      // Check if the input field is empty
+      if (descriptionInput.value.trim() === '') {
+        // Prevent form submission
+        event.preventDefault()
+        // Show error message
+        errorMessage.style.display = 'block'
+      } else {
+        // Hide error message if there is input
+        errorMessage.style.display = 'none'
+      }
+    })
+  </script>
+  <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+{% endblock %}

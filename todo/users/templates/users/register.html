@@ -8,6 +8,7 @@
     </div>
     <form class="todo-body" action="{% url 'users:register' %}" method="post">
         {% csrf_token %}
+        {{ form.non_field_errors }}
 
         <div class="input-group">
             <input
@@ -17,13 +18,14 @@
                 class="email-input"
                 placeholder="Email"
                 required
+                value="{{ form.email.value|default:'' }}"
             />
             {% if form.email.errors %}
-            <div class="error-message">
-                {% for error in form.email.errors %}
-                    <span>{{ error }}</span>
-                {% endfor %}
-            </div>
+                <div class="error-message">
+                    {% for error in form.email.errors %}
+                        <span>{{ error }}</span></br>
+                    {% endfor %}
+                </div>
             {% endif %}
         </div>
         <div class="input-group">
@@ -33,13 +35,14 @@
             name="username"
             class="username-input"
             placeholder="Username (optional)"
+            value="{{ form.username.value|default:'' }}"
             />
             {% if form.username.errors %}
-            <div class="error-message">
-                {% for error in form.username.errors %}
-                    <span>{{ error }}</span>
-                {% endfor %}
-            </div>
+                <div class="error-message">
+                    {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
             {% endif %}
         </div>
         <div class="input-group">
@@ -50,6 +53,7 @@
                 class="first_name-input"
                 placeholder="First name"
                 required
+                value="{{ form.first_name.value|default:'' }}"
             />
             {% if form.first_name.errors %}
             <div class="error-message">
@@ -67,6 +71,7 @@
                 class="last_name-input"
                 placeholder="Last name"
                 required
+                value="{{ form.last_name.value|default:'' }}"
             />
             {% if form.last_name.errors %}
             <div class="error-message">

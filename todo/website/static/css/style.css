@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -7,225 +8,304 @@
 }
 
 body {
-    background: #78c1f3;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-  }
-  
+  background: #78c1f3;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
 .container {
-    background: #ffffff;
-    padding: 25px;
-    width: 550px;
-    border-radius: 10px;
+  background: #ffffff;
+  padding: 25px;
+  width: 550px;
+  border-radius: 10px;
 }
 
 .todo-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-left: 5px;
-    justify-content: center;
-  }
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-left: 5px;
+  justify-content: center;
+}
 
 .todo-body {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #edeef0;
-    border-radius: 30px;
-    padding-left: 20px;
-    margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #edeef0;
+  border-radius: 30px;
+  padding-left: 20px;
+  margin-bottom: 25px;
 }
-  
+
 .todo-body input {
-    flex: 1;
-    border: none;
-    outline: none;
-    background: transparent;
-    padding: 15px 0;
-    font-size: 20px;
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 15px 0;
+  font-size: 20px;
 }
-  
+
 .todo-body img {
-    cursor: pointer;
-    border-radius: 40px;
-    height: 55px;
-    width: 55px;
-    padding: 15px;
-    background: limegreen;
+  cursor: pointer;
+  border-radius: 40px;
+  height: 55px;
+  width: 55px;
+  padding: 15px;
+  background: limegreen;
 }
 
 ul li {
-    list-style: none;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 10px;
-  }
-  
-  li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #edeef0;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
-  h5 {
-    text-align: center;
-    margin-bottom: 10px;
-    color: green;
-  }
-  
-  .todo-controls {
-    width: 25px;
-    height: 25px;
-    padding: 3px;
-    margin-right: 5px;
-  }
+  list-style: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px;
+}
 
-  li {
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #edeef0;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+h5 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: green;
+}
+
+.todo-controls {
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin-right: 5px;
+}
+
+li {
+  opacity: 0;
+  animation: new-item-animation 0.3s linear forwards;
+}
+
+@keyframes new-item-animation {
+  from {
     opacity: 0;
-    animation: new-item-animation 0.3s linear forwards;
-  }
-  
-  @keyframes new-item-animation {
-    from {
-      opacity: 0;
-      transform: translateY(-400px);
-    }
-  
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  li.deleted-item {
-    animation: removed-item-animation 1s cubic-bezier(0.55, -0.04, 0.91, 0.94)
-      forwards;
-    transform-origin: 0% 100%;
-  }
-  
-  @keyframes removed-item-animation {
-    0% {
-      opacity: 1;
-      transform: rotateZ(0);
-    }
-  
-    100% {
-      opacity: 0;
-      transform: translateY(600px) rotateZ(90deg);
-    }
+    transform: translateY(-400px);
   }
 
-  .toggleMe {
-    animation: hideMe 5s forwards;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  @keyframes hideMe {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+}
+
+li.deleted-item {
+  animation: removed-item-animation 1s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
+  transform-origin: 0% 100%;
+}
+
+@keyframes removed-item-animation {
+  0% {
+    opacity: 1;
+    transform: rotateZ(0);
   }
+
+  100% {
+    opacity: 0;
+    transform: translateY(600px) rotateZ(90deg);
+  }
+}
+
+.toggleMe {
+  animation: hideMe 5s forwards;
+}
+
+@keyframes hideMe {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
 
 
 
 
-  .top-nav {
-    background-color: transparent;
-    padding: 10px;
-    text-align: right; 
-    box-shadow: none; 
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-  }
-  
-  .top-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: flex-end; 
-  }
-  
-  .top-nav ul li {
-    margin-right: 20px;
-  }
-  
-  .top-nav ul li a {
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 30px; 
-    color: #4caf50;
-    background-color: transparent; 
-    border: 2px solid #4caf50;
-    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-  }
-  
-  .top-nav ul li a:hover {
-    background-color: #4caf50; 
-    color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
-  }
-  
-  .top-nav ul li a.active {
-    background-color: #4caf50;
-    color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
+.top-nav {
+  background-color: transparent;
+  padding: 10px;
+  text-align: right;
+  box-shadow: none;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
 
-  .styled-button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 22px;
-    cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+.top-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top-nav ul li {
+  margin-right: 20px;
+}
+
+.top-nav ul li a {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: #4caf50;
+  background-color: transparent;
+  border: 2px solid #4caf50;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.top-nav ul li a:hover {
+  background-color: #4caf50;
+  color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.top-nav ul li a.active {
+  background-color: #4caf50;
+  color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.styled-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .styled-button:hover {
-    background-color: #327135;
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+  background-color: #327135;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 .styled-button:focus {
-    outline: none;
+  outline: none;
 }
 
-/* Стили для input при редактировании */
+
 input[type="text"].edit-input {
-  font-size: 16px; /* Размер шрифта, аналогичный отображаемому тексту */
-  /* font-family: 'Arial', sans-serif; Шрифт для соответствия */
-  color: #000; /* Цвет текста */
-  border: none; /* Убираем рамку */
-  background-color: transparent; /* Убираем белый фон */
-  outline: none; /* Убираем выделение при фокусе */
-  width: 100%; /* Подстраиваем ширину под родителя */
+  font-size: 18px;          /* Adjust font size */
+  color: #000;              /* Text color */
+  background-color: #eeff00; /* Yellow background color */
+  border: none;             /* Remove border */
+  outline: none;            /* Remove outline */
+  padding: 5px 10px;        /* Adjust padding for inner spacing */
+  width: 100%; /* Adjust width to fit within container (subtract padding/margin as needed) */
+  box-sizing: border-box;   /* Ensures padding is included in width calculation */
+  border-radius: 5px;       /* Rounded corners if desired */
 }
 
 .buttons {
-  border: none;           /* Remove any border */
-  outline: none;          /* Remove the outline */
-  background: none;       /* Make background transparent */
-  cursor: pointer;        /* Change cursor to pointer on hover */
-  padding: 0;             /* Remove any default padding */
+  border: none;
+  /* Remove any border */
+  outline: none;
+  /* Remove the outline */
+  background: none;
+  /* Make background transparent */
+  cursor: pointer;
+  /* Change cursor to pointer on hover */
+  padding: 0;
+  /* Remove any default padding */
 }
 
 /* Add hover effect for Save button */
 .buttons:hover {
-  transform: scale(1.1);  /* Slightly enlarge button on hover */
-  opacity: 0.8;           /* Reduce opacity for a soft hover effect */
+  transform: scale(1.1);
+  /* Slightly enlarge button on hover */
+  opacity: 0.8;
+  /* Reduce opacity for a soft hover effect */
+}
+
+
+/* Style for completed items */
+.completed {
+  background-color: #d3e9d3;
+  /* Light green background */
+}
+
+/* Align action buttons to the right */
+.action-buttons {
+  margin-left: auto;
+  /* Pushes the action buttons to the far right */
+}
+
+/* Checkbox styling */
+.completed-checkbox {
+  width: 20px;
+  height: 20px;
+  margin-left: 7px;
+  accent-color: #4caf50;
+  /* Green color for checked state */
+  cursor: pointer;
+}
+
+
+/* Ensure the text does not overflow */
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #edeef0;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  /* Allows breaking within words if necessary */
+  overflow-wrap: anywhere;
+  /* Breaks long words at any point */
+  max-width: 100%;
+}
+
+#description-container- {
+    {
+    item.id
+  }
+}
+
+  {
+  max-width: calc(100% - 80px);
+  /* Adjusts the max width based on other content */
+  overflow: hidden;
+  /* Hide overflow content */
+  text-overflow: ellipsis;
+  /* Adds ellipsis for overflowed content */
+  white-space: nowrap;
+  /* Prevents wrapping for a single-line view with ellipsis */
+}
+
+/* If you want text to wrap within multiple lines instead of using ellipsis */
+.list-item #description-container- {
+    {
+    item.id
+  }
+}
+
+  {
+  white-space: normal;
+  /* Allows multi-line wrapping */
 }

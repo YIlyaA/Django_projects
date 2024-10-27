@@ -1,4 +1,6 @@
 from pathlib import Path
+
+from django.conf.global_settings import LOGIN_REDIRECT_URL
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -114,6 +116,7 @@ STATICFILES_DIRS = [
 
 
 AUTH_USER_MODEL = 'users.CustomUser'
+LOGIN_URL = "/login/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
