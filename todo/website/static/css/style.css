@@ -197,10 +197,35 @@ ul li {
 }
 
 .styled-button:hover {
-    background-color: #45a049;
+    background-color: #327135;
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 .styled-button:focus {
     outline: none;
+}
+
+/* Стили для input при редактировании */
+input[type="text"].edit-input {
+  font-size: 16px; /* Размер шрифта, аналогичный отображаемому тексту */
+  /* font-family: 'Arial', sans-serif; Шрифт для соответствия */
+  color: #000; /* Цвет текста */
+  border: none; /* Убираем рамку */
+  background-color: transparent; /* Убираем белый фон */
+  outline: none; /* Убираем выделение при фокусе */
+  width: 100%; /* Подстраиваем ширину под родителя */
+}
+
+.buttons {
+  border: none;           /* Remove any border */
+  outline: none;          /* Remove the outline */
+  background: none;       /* Make background transparent */
+  cursor: pointer;        /* Change cursor to pointer on hover */
+  padding: 0;             /* Remove any default padding */
+}
+
+/* Add hover effect for Save button */
+.buttons:hover {
+  transform: scale(1.1);  /* Slightly enlarge button on hover */
+  opacity: 0.8;           /* Reduce opacity for a soft hover effect */
 }

@@ -46,18 +46,23 @@ class DeleteItem(LoginRequiredMixin, DeleteView):
     model = ToDoItems
     success_url = reverse_lazy('website:index')
 
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return JsonResponse({'success': True})
+
 
 class UpdateItem(LoginRequiredMixin, UpdateView):
     model = ToDoItems
-    success_url = reverse_lazy('website:index')
+    fields = ['description']
 
     def post(self, request, *args, **kwargs):
-        form = ToDoItemForm(request.POST)
-        if form.is_valid():
-            item = form.save(commit=False)
-            item.user = self.request.user
-            item.save()
-
-            return HttpResponseRedirect(self.success_url)
-        else:
-            return self.form_invalid(form)
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':   #save item with ajax
+            self.object = self.get_object()
+            form = self.get_form()
+            if form.is_valid():
+                form.save()
+                return JsonResponse({'success': True})
+            else:
+                return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+        return JsonResponse({'error': 'Non-AJAX request received'}, status=400)

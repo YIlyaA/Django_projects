@@ -16,10 +16,11 @@
       <nav class="top-nav">
         <ul>
           <li><a href="{% url "website:index" %}" class="styled-button active">To-Do</a></li>
-          <li><form action="{% url 'users:logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="styled-button" onclick="confirmLogout(event)">Logout</button>
-              </form>
+          <li>
+            <form action="{% url 'users:logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="styled-button" onclick="confirmLogout(event)">Logout</button>
+            </form>
           </li>
         </ul>
       </nav>

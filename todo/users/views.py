@@ -6,16 +6,16 @@ from .models import CustomUser
 from django.contrib import messages
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.contrib.auth.views import LoginView, LogoutView
+from .mixins import RedirectAuthenticatedUserMixin
 
-
-class UserRegistrationView(CreateView):
-    model = CustomUser
-    form_class = CustomUserCreationForm
-    template_name = 'users/register.html'
-    success_url = reverse_lazy('users:login')
+class UserRegistrationView(RedirectAuthenticatedUserMixin, CreateView):
+    model = CustomUser                              # users model 
+    form_class = CustomUserCreationForm             # registration form
+    template_name = 'users/register.html'           # template name
+    success_url = reverse_lazy('users:login')       # success url
 
     def form_valid(self, form):
-        user = form.save()
+        form.save()                # save the form 
         # login(self.request, user)  # login user without login again 
         messages.success(self.request, 'Registration successful. Please log in.')
         return super().form_valid(form)
@@ -25,7 +25,7 @@ class UserRegistrationView(CreateView):
         return self.render_to_response(self.get_context_data(form=form))
     
 
-class UserLoginView(LoginView):
+class UserLoginView(RedirectAuthenticatedUserMixin, LoginView):
     authentication_form = CustomAuthenticationForm
     template_name = 'users/login.html'
 
@@ -42,12 +42,12 @@ class UserLoginView(LoginView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class CustomLogoutView(LogoutView):
+# class CustomLogoutView(LogoutView):
 
-    def get_success_url(self):
-        return reverse_lazy('users:login')
+#     def get_success_url(self):
+#         return reverse_lazy('users:login')
     
-    def dispatch(self, request, *args, **kwargs):
-        messages.success(request, "Successfully logged out.")
-        return super().dispatch(request, *args, **kwargs)
+#     def dispatch(self, request, *args, **kwargs):
+#         messages.success(request, "Successfully logged out.")
+#         return super().dispatch(request, *args, **kwargs)
  

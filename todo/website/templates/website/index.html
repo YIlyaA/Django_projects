@@ -11,7 +11,7 @@
         {% csrf_token %}
         <div class="todo-body">
             <input type="text" id="todoText" name="description" class="todo-input" placeholder="Add your items" />
-            <button type="submit" id="add-item" style="background: none; border: none;">
+            <button  class="buttons" type="submit" id="add-item" style="background: none; border: none;">
                 <img src="{% static 'img/plus.png' %}" alt="+" />
             </button>
         </div>
@@ -23,43 +23,39 @@
       {% for item in items %}
       
         <li style="display: flex; justify-content: space-between; align-items: center;">
-          <div style="word-wrap: break-word; width: 80%; padding-left: 10px; {% if item.status %}text-decoration: line-through;{% endif %}">
-            {{ item.description }}
+          <div style="word-wrap: break-word; width: 80%; padding-left: 10px;">
+            <span id="description-text-{{ item.id }}">{{ item.description }}</span>
+            <input type="text" id="description-input-{{ item.id }}" value="{{ item.description }}" class="edit-input" style="display:none;" />
           </div>
+
+
           <div style="display: flex; gap: 10px;">
+          <!-- Edit button (will be hidden when editing) -->
+          <button href="#" class="buttons" id="edit-button-{{ item.id }}" onclick="editItem({{ item.id }}); return false;">
+            <img src="{% static 'img/pen.png' %}" style="width: 25px; height: auto; margin-top: 5px;" />
+          </button>
 
-            {% comment %} <a href="{% url "website:update" item.id %}"><img src="{% static "img/pen.png" %}" style="width: 25px; height: auto; margin-top: 5px;"/></a> {% endcomment %}
-            <form id="todo-form" method="post" action="{% url 'website:update' item.id %}">
-              {% csrf_token %}
-              <button type="submit" style="background: none; border: none">
-                <img src="{% static 'img/pen.png' %}" style="width: 27px; height: auto; margin-right: 5px; margin-top: 5px;"/>
-              </button>
-            </form>
+          <!-- Save button (hidden initially) -->
+          <button id="save-button-{{ item.id }}" class="save-button buttons" onclick="saveItem({{ item.id }}); return false;" style="display:none;">
+            <img src="{% static 'img/confirm.png' %}" style="width: 25px; height: auto; margin-top: 5px;" />
+          </button>
 
+          <!-- Cancel button (hidden initially) -->
+          <button href="#" id="back-button-{{ item.id }}" class="buttons" onclick="cancelEdit({{ item.id }}); return false;" style="display:none;">
+            <img src="{% static 'img/cancel.png' %}" style="width: 25px; height: auto; margin-top: 5px;" />
+          </button>
 
-            <form id="todo-form" method="post" action="{% url 'website:delete' item.id %}">
-              {% csrf_token %}
-              <button type="submit" style="background: none; border: none;" onclick="confirmDelete(event)">
-                <img src="{% static 'img/garbage.png' %}" style="width: 27px; height: auto; margin-right: 5px; margin-top: 5px;"/>
-              </button>
-            </form>
-
-            <a href="#"><img src="{% static "img/confirm.png" %}" style="width: 25px; height: auto; margin-top: 5px;"/></a>
-
-          </div>
-        </li>
-      {% endfor %}
+          <!-- Delete button -->
+          <form id="delete-form-{{ item.id }}" method="post" action="{% url 'website:delete' item.id %}">
+            {% csrf_token %}
+            <button type="submit" class="buttons" style="background: none; border: none;" onclick="confirmDelete(event)" id="delete-button-{{ item.id }}">
+              <img src="{% static 'img/garbage.png' %}" style="width: 27px; height: auto; margin-right: 5px; margin-top: 5px;" />
+            </button>
+          </form>
+            </li>
+          {% endfor %}
 
         
   </div>
-  <script>
-    function confirmDelete(event) {
-        // Show confirmation prompt
-      if (!confirm("Are you sure you want to delete this item?")) {
-        // If the user cancels, prevent the form from submitting
-        event.preventDefault();
-      }
-    }
-  </script>
   <script type="text/javascript" src="{% static "js/script.js" %}"></script>
 {% endblock content %}
