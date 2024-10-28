@@ -244,8 +244,7 @@ input[type="text"].edit-input {
 
 /* Style for completed items */
 .completed {
-  background-color: #d3e9d3;
-  /* Light green background */
+  background-color: #d3e9d3 !important; /* Light green background */
 }
 
 /* Align action buttons to the right */
@@ -279,33 +278,4 @@ input[type="text"].edit-input {
   overflow-wrap: anywhere;
   /* Breaks long words at any point */
   max-width: 100%;
-}
-
-#description-container- {
-    {
-    item.id
-  }
-}
-
-  {
-  max-width: calc(100% - 80px);
-  /* Adjusts the max width based on other content */
-  overflow: hidden;
-  /* Hide overflow content */
-  text-overflow: ellipsis;
-  /* Adds ellipsis for overflowed content */
-  white-space: nowrap;
-  /* Prevents wrapping for a single-line view with ellipsis */
-}
-
-/* If you want text to wrap within multiple lines instead of using ellipsis */
-.list-item #description-container- {
-    {
-    item.id
-  }
-}
-
-  {
-  white-space: normal;
-  /* Allows multi-line wrapping */
 }
