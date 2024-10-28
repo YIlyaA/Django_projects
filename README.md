@@ -29,3 +29,4 @@
   ```
   python manage.py runserver
   ```
+  5. You can now access the application at `http://127.0.0.1:8000/login/`
