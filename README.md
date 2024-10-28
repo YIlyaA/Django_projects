@@ -1,8 +1,12 @@
 # Django_projects
 ### Interesting Django Project Ideas for All Levels — Beginners to Advanced Level
 
-## 1. To-Do List Application:
+<details>
+<summary><h2><bold>1. To-Do List Application:</bold></h2></summary>
+
    Simple to-do list app where users can add, edit, and delete tasks. User email authentication allow each user to manage their own task list.
+
+   https://github.com/user-attachments/assets/1a31712b-cb53-4a63-a1c1-38e082b7a7c2
 
   1. **Install Dependencies**:
    Use Pipenv to manage your environment:
@@ -30,3 +34,4 @@
   python manage.py runserver
   ```
   5. You can now access the application at `http://127.0.0.1:8000/login/`
+</details>
