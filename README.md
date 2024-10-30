@@ -35,3 +35,9 @@
   ```
   5. You can now access the application at `http://127.0.0.1:8000/login/`
 </details>
+
+<details>
+   <summary><h2><bold>2. Blog Platform</bold></h2></summary>
+   
+   A basic blogging platform where users can create, edit, and delete posts. Include features like commenting, tagging, and categorization to organize posts effectively.   
+</details>
