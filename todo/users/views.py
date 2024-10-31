@@ -29,10 +29,9 @@ class UserLoginView(RedirectAuthenticatedUserMixin, LoginView):
     authentication_form = CustomAuthenticationForm
     template_name = 'users/login.html'
 
-
     def get_success_url(self):
         return reverse_lazy('website:index')
-    
+
     def form_valid(self, form):
         messages.success(self.request, 'Login successful.')
         return super().form_valid(form)
@@ -40,7 +39,6 @@ class UserLoginView(RedirectAuthenticatedUserMixin, LoginView):
     def form_invalid(self, form):
         messages.error(self.request, 'Invalid login credentials. Please try again.')
         return self.render_to_response(self.get_context_data(form=form))
-
 
 class CustomLogoutView(LogoutView):
     def get_success_url(self):
