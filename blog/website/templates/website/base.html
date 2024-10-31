@@ -1,0 +1,120 @@
+{% load static %}
+
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content= 
+        "width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="{% static "css/style.css" %}" />
+    <title>Blogging Website</title> 
+    <link rel="stylesheet" href="{% static 'css/notifications.css' %}" />
+    <script src="{% static 'js/notifications.js' %}"></script>
+</head> 
+    {% include "includes/notifications.html" %}
+
+<body> 
+    <header> 
+        <h1>COMPUTER SCIENCE</h1> 
+        <p>our future in technologies</p> 
+    </header> 
+
+    <nav> 
+        <a href="#">Home</a> 
+        <a href="#">My Profile</a> 
+        <a href="#">My Posts</a> 
+        <form method="POST" action="{% url 'users:logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="background: none; border: none; color: #fff; cursor: pointer;">Logout</button>
+        </form>
+    </nav> 
+
+    <div class="container"> 
+        <main> 
+            <article> 
+                <h2>HTML</h2> 
+                <p class="post-meta"> 
+                    Published on December 11, 2023 by GeeksforGeeks 
+                </p> 
+                <p> 
+                    HTML stands for HyperText Markup Language. It is 
+                    used to design the web pages. With the help of HTML, 
+                    you can create a complete website structure. HTML 
+                    is the combination of Hypertext and Markup language. 
+                    Hypertext defines the link between the web pages 
+                    and markup language defines the text document within 
+                    the tag that define the structure of web pages. 
+                </p> 
+            </article> 
+
+            <article> 
+                <h2>CSS</h2> 
+                <p class="post-meta"> 
+                    Published on December 10, 2023 by GeeksforGeeks 
+                </p> 
+                <p> 
+                    CSS (Cascading Style Sheets) is used to styles web 
+                    pages. Cascading Style Sheets are fondly referred 
+                    to as CSS. The reason for using this is to simplify 
+                    the process of making web pages presentable. It allows 
+                    you to apply styles on web pages. More importantly, 
+                    it enables you to do this independently of the HTML 
+                    that makes up each web page. 
+                </p> 
+            </article> 
+
+            <article> 
+                <h2>JavaScript</h2> 
+                <p class="post-meta"> 
+                    Published on December 09, 2023 by GeeksforGeeks 
+                </p> 
+                <p> 
+                    JavaScript (JS) is the most popular lightweight, 
+                    interpreted compiled programming language. It can 
+                    be used for both Client-side as well as Server-side 
+                    developments. JavaScript also known as a scripting 
+                    language for web pages. This JavaScript Tutorial is 
+                    designed to help both beginners and experienced 
+                    professionals master the fundamentals of JavaScript 
+                    and unleash their creativity to build powerful web 
+                    applications. From basic syntax and data types to 
+                    advanced topics such as object-oriented programming 
+                    and DOM manipulation. 
+                </p> 
+            </article> 
+
+            <article> 
+                <h2>ReactJS</h2> 
+                <p class="post-meta"> 
+                    Published on December 08, 2023 by GeeksforGeeks 
+                </p> 
+                <p> 
+                    ReactJS is a declarative, efficient, and flexible 
+                    JavaScript library for building user interfaces. 
+                    It is an open-source, component-based front-end 
+                    library that is responsible only for the view layer 
+                    of the application. ReactJS is not a framework, it 
+                    is just a library developed by Facebook to solve 
+                    some problems that we were facing earlier. 
+                </p> 
+            </article> 
+        </main> 
+
+        <aside> 
+            <h2>Recent Posts</h2> 
+            <ul> 
+                <li><a href="#">HTML</a></li> 
+                <li><a href="#">CSS</a></li> 
+                <li><a href="#">JavaScript</a></li> 
+                <li><a href="#">ReactJS</a></li> 
+            </ul> 
+        </aside> 
+    </div> 
+
+    <footer> 
+        <p>© 2023 Your Blog Name. All rights reserved.</p> 
+    </footer> 
+</body> 
+
+</html>

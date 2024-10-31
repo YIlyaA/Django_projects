@@ -1,0 +1,46 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+<div class="container">
+    <!-- Title section -->
+    <div class="title">Login</div>
+    <div class="content">
+      <!-- Login form -->
+      <form method="POST" action="{% url 'users:login' %}">
+        {% csrf_token %}
+
+        <div class="user-details">
+          <!-- Input for Email -->
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" name="username" placeholder="Enter your email" required>
+            {% if form.username.errors %}
+                <div class="error">
+                    {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+          </div>
+          <!-- Input for Password -->
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="password" name="password" placeholder="Enter your password" required>
+            {% if form.password.errors %}
+                <div class="error">
+                    {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+          </div>
+        </div>
+        <!-- Submit button -->
+        <div class="button">
+            <a href="{% url "users:register" %}">Don't have account?</a>
+          <input type="submit" value="Login">
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock content %}
