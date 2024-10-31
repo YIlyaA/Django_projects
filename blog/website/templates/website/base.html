@@ -21,7 +21,7 @@
     </header> 
 
     <nav> 
-        <a href="#">Home</a> 
+        <a href="{% url "website:index" %}">Home</a> 
         <a href="#">My Profile</a> 
         <a href="#">My Posts</a> 
         <form method="POST" action="{% url 'users:logout' %}" style="display:inline;">
@@ -32,88 +32,31 @@
 
     <div class="container"> 
         <main> 
-            <article> 
-                <h2>HTML</h2> 
-                <p class="post-meta"> 
-                    Published on December 11, 2023 by GeeksforGeeks 
-                </p> 
-                <p> 
-                    HTML stands for HyperText Markup Language. It is 
-                    used to design the web pages. With the help of HTML, 
-                    you can create a complete website structure. HTML 
-                    is the combination of Hypertext and Markup language. 
-                    Hypertext defines the link between the web pages 
-                    and markup language defines the text document within 
-                    the tag that define the structure of web pages. 
-                </p> 
-            </article> 
-
-            <article> 
-                <h2>CSS</h2> 
-                <p class="post-meta"> 
-                    Published on December 10, 2023 by GeeksforGeeks 
-                </p> 
-                <p> 
-                    CSS (Cascading Style Sheets) is used to styles web 
-                    pages. Cascading Style Sheets are fondly referred 
-                    to as CSS. The reason for using this is to simplify 
-                    the process of making web pages presentable. It allows 
-                    you to apply styles on web pages. More importantly, 
-                    it enables you to do this independently of the HTML 
-                    that makes up each web page. 
-                </p> 
-            </article> 
-
-            <article> 
-                <h2>JavaScript</h2> 
-                <p class="post-meta"> 
-                    Published on December 09, 2023 by GeeksforGeeks 
-                </p> 
-                <p> 
-                    JavaScript (JS) is the most popular lightweight, 
-                    interpreted compiled programming language. It can 
-                    be used for both Client-side as well as Server-side 
-                    developments. JavaScript also known as a scripting 
-                    language for web pages. This JavaScript Tutorial is 
-                    designed to help both beginners and experienced 
-                    professionals master the fundamentals of JavaScript 
-                    and unleash their creativity to build powerful web 
-                    applications. From basic syntax and data types to 
-                    advanced topics such as object-oriented programming 
-                    and DOM manipulation. 
-                </p> 
-            </article> 
-
-            <article> 
-                <h2>ReactJS</h2> 
-                <p class="post-meta"> 
-                    Published on December 08, 2023 by GeeksforGeeks 
-                </p> 
-                <p> 
-                    ReactJS is a declarative, efficient, and flexible 
-                    JavaScript library for building user interfaces. 
-                    It is an open-source, component-based front-end 
-                    library that is responsible only for the view layer 
-                    of the application. ReactJS is not a framework, it 
-                    is just a library developed by Facebook to solve 
-                    some problems that we were facing earlier. 
-                </p> 
-            </article> 
+            {% for post in posts %}
+                <article> 
+                    <h2>{{ post.title }}</h2> 
+                    <p class="post-meta"> 
+                        Published on {{ post.created_at|date:"F d, Y" }} by {{ post.user }} <br>
+                        {% if post.updated_at and post.updated_at != post.created_at %}Updated on {{ post.updated_at }} {% endif %}
+                    </p> 
+                    <p> 
+                        {{ post.content|truncatechars:300 }}
+                    </p> 
+                </article> 
+            {% endfor %}
         </main> 
 
         <aside> 
             <h2>Recent Posts</h2> 
             <ul> 
-                <li><a href="#">HTML</a></li> 
-                <li><a href="#">CSS</a></li> 
-                <li><a href="#">JavaScript</a></li> 
-                <li><a href="#">ReactJS</a></li> 
+                {% for post in posts %}
+                    <li><a href="#">{{ post.title }}</a></li> 
+                {% endfor %}
             </ul> 
         </aside> 
     </div> 
-
     <footer> 
-        <p>© 2023 Your Blog Name. All rights reserved.</p> 
+        <p>© 2024 Blog. All rights reserved.</p> 
     </footer> 
 </body> 
 
