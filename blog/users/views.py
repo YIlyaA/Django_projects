@@ -20,7 +20,6 @@ class UserLoginView(RedirectAuthenticatedUserMixin, LoginView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        print(form)
         messages.error(self.request, 'Invalid login credentials. Please try again.')
         return self.render_to_response(self.get_context_data(form=form))
 
@@ -30,12 +29,14 @@ class UserRegisterView(RedirectAuthenticatedUserMixin, CreateView):
     models = User
     template_name = 'users/register.html'
     form_class = CustomUserCreationForm
-    success_url = '/'  # Redirect to home page or another success page
+
+    def get_success_url(self):
+        return reverse_lazy('website:index')
 
     def form_valid(self, form):
-        # form.save()          # save the form 
-        user = form.save()                  # save the form for user
-        login(self.request, user)           # if you want login user without login again 
+        # form.save()                           # save the form 
+        user = form.save()                 # save the form for user
+        login(self.request, user)               # if you want login user without login again 
         messages.success(self.request, 'Registration successful. Please log in.')
         return super().form_valid(form)
     
