@@ -70,3 +70,69 @@ footer {
     bottom: 0; 
     width: 100%; 
 } 
+
+
+h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space between form groups */
+}
+
+label {
+    display: block; /* Labels are block elements */
+    margin-bottom: 5px; /* Space between label and input */
+    font-weight: bold; /* Bold text for labels */
+}
+
+input[type="text"], textarea {
+    width: 100%; /* Full width for inputs */
+    padding: 10px; /* Padding for inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Larger font size */
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+
+
+
+.button-group {
+    margin-top: 10px;  /* Space between the post content and buttons */
+}
+
+.btn {
+    display: inline-block; /* Display button as block */
+    padding: 10px 20px; /* Padding for buttons */
+    margin-top: 10px; /* Space above the button */
+    border-radius: 5px; /* Rounded corners for buttons */
+    background-color: #4CAF50; /* Green background for submit */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.update-btn {
+    background-color: #4CAF50;  /* Green background for update */
+    color: white;  /* White text */
+}
+
+.delete-btn {
+    background-color: #f44336;  /* Red background for delete */
+    color: white;  /* White text */
+}
+
+.publish-btn {
+    background-color: #008CBA;  /* Blue background for publish */
+    color: white;  /* White text */
+}
+
+.btn:hover {
+    opacity: 0.8;  /* Slightly darken on hover */
+}

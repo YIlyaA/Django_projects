@@ -16,7 +16,7 @@
                     {{ post.content }}  <!-- Отображаем весь текст с новыми стилями -->
                 </p> 
                 <div class="button-group">
-                    <a href="#" class="btn update-btn">Update post</a>
+                    <a href="{% url "website:update" post.id %}" class="btn update-btn">Update post</a>
                     <form action="{% url "website:delete" post.id %}" method="post">
                         {% csrf_token %}
                         <button type="submit" href="{% url "website:delete" post.id %}" class="btn delete-btn" onclick="confirmDelete(event, this)">Delete post</button>
