@@ -16,6 +16,7 @@ header {
 nav { 
     background-color: #242424; 
     padding: 10px; 
+    text-align: center;
 } 
 
 nav a { 
@@ -25,6 +26,11 @@ nav a {
     margin-right: 10px; 
     display: inline-block; 
 } 
+
+.italic {
+    font-size: 13px;
+    font-style: italic;
+}
 
 .container {
     display: flex; /* Используем Flexbox для расположения элементов */
@@ -62,14 +68,15 @@ aside {
     border-radius: 5px; /* Закругляет углы боковой панели */
 }
 
-footer { 
+footer {
     background-color: #242424; 
     color: #fff; 
     text-align: center; 
-    position: fixed; 
-    bottom: 0; 
+    padding: 20px; /* Add padding for better appearance */
     width: 100%; 
-} 
+    position: relative; /* Change to relative positioning */
+    margin-top: 20px; /* Space above the footer */
+}
 
 
 h2 {
@@ -135,4 +142,43 @@ textarea {
 
 .btn:hover {
     opacity: 0.8;  /* Slightly darken on hover */
+}
+
+
+
+
+/* pagination */
+.pagination {
+    display: flex;
+    justify-content: center; /* Center the pagination */
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+}
+
+.page-item {
+    margin: 0 5px; /* Space between page items */
+}
+
+.page-link {
+    padding: 10px 15px; /* Padding for clickable area */
+    border: 1px solid #ffffff; /* Border color */
+    color: #ffffff; /* Text color */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+}
+
+.page-link:hover {
+    background-color: #007bff; /* Background on hover */
+    color: #fff; /* White text on hover */
+}
+
+.active .page-link {
+    background-color: #007bff; /* Background color for active page */
+    color: white; /* White text for active page */
+}
+
+.disabled .page-link {
+    color: #cccccc1b; /* Grey color for disabled links */
+    pointer-events: none; /* Disable click on disabled */
 }
