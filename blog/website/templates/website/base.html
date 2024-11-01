@@ -7,54 +7,21 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content= 
         "width=device-width, initial-scale=1.0"> 
-    <link rel="stylesheet" href="{% static "css/style.css" %}" />
+    <link rel="stylesheet" href="{% static "css/index.css" %}" />
+    <link rel="stylesheet" href="{% static "css/myposts.css" %}" />
     <title>Blogging Website</title> 
     <link rel="stylesheet" href="{% static 'css/notifications.css' %}" />
     <script src="{% static 'js/notifications.js' %}"></script>
+    {% comment %} <script src="{% static 'js/script.js' %}"></script> {% endcomment %}
 </head> 
     {% include "includes/notifications.html" %}
 
 <body> 
-    <header> 
-        <h1>COMPUTER SCIENCE</h1> 
-        <p>our future in technologies</p> 
-    </header> 
+    {% include "website/includes/header.html" %}
+    {% include "website/includes/nav.html" %}
 
-    <nav> 
-        <a href="{% url "website:index" %}">Home</a> 
-        <a href="#">My Profile</a> 
-        <a href="#">My Posts</a> 
-        <form method="POST" action="{% url 'users:logout' %}" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit" style="background: none; border: none; color: #fff; cursor: pointer;">Logout</button>
-        </form>
-    </nav> 
+    {% block content %}{% endblock content %} 
 
-    <div class="container"> 
-        <main> 
-            {% for post in posts %}
-                <article> 
-                    <h2>{{ post.title }}</h2> 
-                    <p class="post-meta"> 
-                        Published on {{ post.created_at|date:"F d, Y" }} by {{ post.user }} <br>
-                        {% if post.updated_at and post.updated_at != post.created_at %}Updated on {{ post.updated_at }} {% endif %}
-                    </p> 
-                    <p> 
-                        {{ post.content|truncatechars:300 }}
-                    </p> 
-                </article> 
-            {% endfor %}
-        </main> 
-
-        <aside> 
-            <h2>Recent Posts</h2> 
-            <ul> 
-                {% for post in posts %}
-                    <li><a href="#">{{ post.title }}</a></li> 
-                {% endfor %}
-            </ul> 
-        </aside> 
-    </div> 
     <footer> 
         <p>© 2024 Blog. All rights reserved.</p> 
     </footer> 

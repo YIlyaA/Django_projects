@@ -1,0 +1,40 @@
+{% extends "website/base.html" %}
+
+{% block content %}
+<div class="container"> 
+    <main> 
+        {% for post in posts %}
+            <article> 
+                <h2>{{ post.title }}</h2> 
+                <p class="post-meta"> 
+                    Published on {{ post.created_at|date:"F d, Y" }} by {{ post.user }} <br>
+                    {% if post.updated_at and post.updated_at != post.created_at %}
+                        Updated on {{ post.updated_at|date:"F d, Y" }} 
+                    {% endif %}
+                </p> 
+                <p class="article-content"> 
+                    {{ post.content }}  <!-- Отображаем весь текст с новыми стилями -->
+                </p> 
+                <div class="button-group">
+                    <a href="#" class="btn update-btn">Update post</a>
+                    <form action="{% url "website:delete" post.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" href="{% url "website:delete" post.id %}" class="btn delete-btn" onclick="confirmDelete(event, this)">Delete post</button>
+                    </form>
+                </div>
+            </article> 
+        {% endfor %}
+    </main> 
+
+    <aside> 
+        <a href="#" class="btn publish-btn">Publish new post</a>
+    </aside> 
+    <script>
+        function confirmDelete(event) {
+            if (!confirm("Are you sure you want to delete this item?")) {    // confirmation of deletion
+                event.preventDefault();
+            }
+        }
+    </script>
+</div>
+{% endblock content %}

@@ -1,0 +1,38 @@
+.button-group {
+    margin-top: 10px;  /* Space between the post content and buttons */
+}
+
+.btn {
+    display: inline-block;  /* Display links as block elements */
+    padding: 10px 20px;  /* Add padding for better click area */
+    margin-right: 10px;  /* Space between buttons */
+    border-radius: 5px;  /* Rounded corners */
+    text-decoration: none;  /* Remove underline */
+    font-weight: bold;  /* Make text bold */
+    transition: background-color 0.3s;  /* Smooth transition for hover effect */
+}
+
+.update-btn {
+    background-color: #4CAF50;  /* Green background for update */
+    color: white;  /* White text */
+}
+
+.delete-btn {
+    background-color: #f44336;  /* Red background for delete */
+    color: white;  /* White text */
+}
+
+.publish-btn {
+    background-color: #008CBA;  /* Blue background for publish */
+    color: white;  /* White text */
+}
+
+.btn:hover {
+    opacity: 0.8;  /* Slightly darken on hover */
+}
+
+.article-content {
+    max-width: 800px; /* Максимальная ширина контейнера */
+    line-height: 1.5; /* Высота строки для лучшего чтения */
+    overflow-wrap: break-word; /* Перенос слов, если они длинные */
+}
