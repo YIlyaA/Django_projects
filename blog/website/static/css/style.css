@@ -94,16 +94,16 @@ label {
     font-weight: bold; /* Bold text for labels */
 }
 
-input[type="text"], textarea {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"], /* Add other input types if needed */
+textarea {
     width: 100%; /* Full width for inputs */
     padding: 10px; /* Padding for inputs */
     border: 1px solid #ccc; /* Light border */
     border-radius: 4px; /* Rounded corners */
     font-size: 16px; /* Larger font size */
-}
-
-textarea {
-    resize: vertical; /* Allow vertical resizing */
 }
 
 
@@ -114,15 +114,26 @@ textarea {
 }
 
 .btn {
-    display: inline-block; /* Display button as block */
-    padding: 10px 20px; /* Padding for buttons */
-    margin-top: 10px; /* Space above the button */
-    border-radius: 5px; /* Rounded corners for buttons */
-    background-color: #4CAF50; /* Green background for submit */
-    color: white; /* White text */
+    display: inline-block; /* Make button inline block */
+    padding: 10px 20px; /* Padding for the buttons */
+    border-radius: 5px; /* Rounded corners */
     border: none; /* Remove border */
+    color: white; /* White text */
     cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s; /* Smooth transition for hover */
+    margin-top: 10px; /* Space above the button */
+    text-align: center; /* Center text */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.save-btn {
+    background-color: #4CAF50; /* Green background for Save */
+}
+
+.back-btn {
+    min-width: 60px;
+    min-height: 5px;
+    background-color: #007BFF; /* Blue background for Back */
 }
 
 .update-btn {
@@ -181,4 +192,13 @@ textarea {
 .disabled .page-link {
     color: #cccccc1b; /* Grey color for disabled links */
     pointer-events: none; /* Disable click on disabled */
+}
+
+
+select {
+    width: 100%; /* Полная ширина для селекта */
+    padding: 10px; /* Отступы внутри селекта */
+    border: 1px solid #ccc; /* Светлый бордер */
+    border-radius: 4px; /* Закругление углов */
+    font-size: 16px; /* Размер шрифта */
 }

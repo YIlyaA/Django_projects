@@ -29,12 +29,5 @@
     <aside> 
         <a href="{% url "website:create" %}" class="btn publish-btn">Publish new post</a>
     </aside> 
-    <script>
-        function confirmDelete(event) {
-            if (!confirm("Are you sure you want to delete this item?")) {    // confirmation of deletion
-                event.preventDefault();
-            }
-        }
-    </script>
 </div>
 {% endblock content %}

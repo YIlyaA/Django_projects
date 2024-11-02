@@ -1,0 +1,50 @@
+{% extends "website/base.html" %}
+
+{% block content %}
+<style>
+    .container {
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
+        max-width: 600px; /* Set a maximum width for the form */
+        margin: 20px auto; /* Center the container */
+        padding: 20px; /* Padding around the container */
+        background-color: #fff; /* Background color */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    }
+</style>
+<div class="container">
+    <h2>PROFILE</h2>
+    <form method="POST" action="{% url 'users:profile' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Full name:</label>
+            <input type="text" name="full_name" maxlength="100" value="{{ form.full_name.value }}" required>
+        </div>
+        <div class="form-group">
+            <label for="title">Username:</label>
+            <input type="text" name="username" maxlength="100" value="{{ form.username.value }}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" maxlength="100" value="{{ form.email.value }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="title">Phone:</label>
+            <input type="text" name="phone" maxlength="100" value="{{ form.phone.value }}" required>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select name="gender" required>
+                <option value="{{ form.gender.value }}">{{ form.gender.value }}</option>
+                {% for value, display in genders %}
+                    <option value="{{ value }}">{{ display }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn save-btn" onclick="confirmUpdateProfile(event)">Save</button>
+        <a href="{% url 'website:myposts' %}" class="btn back-btn">Back</a>
+    </form>
+</div>
+{% endblock content %}
