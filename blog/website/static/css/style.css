@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+html, body {
+    height: 100%; /* Ensure full height for body */
+    margin: 0; /* Reset margin */
+}
+
+body {
+    display: flex; /* Use Flexbox */
+    flex-direction: column; /* Stack children vertically */
+}
+
+header { 
+    background-color: #ffffff; 
+    color: #000000; 
+    text-align: center; 
+    padding: 20px; /* Добавляем отступы */
+} 
+
+nav { 
+    background-color: #242424; 
+    padding: 10px; 
+    text-align: center;
+} 
+
+.content-wrapper {
+    min-height: calc(100vh - 60px); /* Adjust this value to be the height of your footer */
+    display: flex;
+    flex-direction: column;
+}
+
+nav a { 
+    color: #fff; 
+    text-decoration: none; 
+    padding: 10px; 
+    margin-right: 10px; 
+    display: inline-block; 
+} 
+
+.italic {
+    font-size: 13px;
+    font-style: italic;
+}
+
+.container {
+    display: flex; /* Используем Flexbox для расположения элементов */
+    max-width: 1200px; /* Максимальная ширина контейнера */
+    width: 100%; /* Ширина контейнера 100% */
+    margin: 0 auto; /* Центрирует контейнер */
+    padding: 20px; /* Внутренние отступы */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень контейнера */
+    border-radius: 5px; /* Закругление углов */
+    background-color: #fff; /* Цвет фона */
+}
+
+article {
+    margin-bottom: 20px; /* Отступы между статьями */
+    padding: 20px;
+    border: #000000 1px solid;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.article-content {
+    line-height: 1.5; /* Высота строки для улучшенной читаемости */
+    overflow-wrap: break-word; /* Перенос слов, если они длинные */
+}
+
+main {
+    flex: 2; /* Основной контент занимает 2/3 пространства */
+    margin-right: 20px; /* Отступ между основным контентом и боковой панелью */
+    min-width: 0; /* Убедитесь, что контейнер может сжиматься */
+}
+
+aside {
+    flex: 1; /* Боковая панель занимает 1/3 пространства */
+    background-color: #c9c9c9; 
+    padding: 10px; 
+    border-radius: 5px; /* Закругляет углы боковой панели */
+}
+
+footer {
+    background-color: #242424; /* Footer background color */
+    color: #fff; /* Footer text color */
+    text-align: center; /* Center text */
+    padding: 20px; /* Padding around footer */
+    position: relative; /* Relative positioning */
+}
+
+
+h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space between form groups */
+}
+
+label {
+    display: block; /* Labels are block elements */
+    margin-bottom: 5px; /* Space between label and input */
+    font-weight: bold; /* Bold text for labels */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"], /* Add other input types if needed */
+textarea {
+    width: 100%; /* Full width for inputs */
+    padding: 10px; /* Padding for inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Larger font size */
+}
+
+
+
+
+.button-group {
+    margin-top: 10px;  /* Space between the post content and buttons */
+}
+
+.btn {
+    display: inline-block; /* Make button inline block */
+    padding: 10px 20px; /* Padding for the buttons */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Remove border */
+    color: white; /* White text */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-top: 10px; /* Space above the button */
+    text-align: center; /* Center text */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.save-btn {
+    background-color: #4CAF50; /* Green background for Save */
+}
+
+.back-btn {
+    min-width: 60px;
+    min-height: 5px;
+    background-color: #007BFF; /* Blue background for Back */
+}
+
+.update-btn {
+    background-color: #4CAF50;  /* Green background for update */
+    color: white;  /* White text */
+}
+
+.delete-btn {
+    background-color: #f44336;  /* Red background for delete */
+    color: white;  /* White text */
+}
+
+.publish-btn {
+    background-color: #008CBA;  /* Blue background for publish */
+    color: white;  /* White text */
+}
+
+.btn:hover {
+    opacity: 0.8;  /* Slightly darken on hover */
+}
+
+
+
+
+/* pagination */
+.pagination {
+    display: flex;
+    justify-content: center; /* Center the pagination */
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+}
+
+.page-item {
+    margin: 0 5px; /* Space between page items */
+}
+
+.page-link {
+    padding: 10px 15px; /* Padding for clickable area */
+    border: 1px solid #ffffff; /* Border color */
+    color: #ffffff; /* Text color */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+}
+
+.page-link:hover {
+    background-color: #007bff; /* Background on hover */
+    color: #fff; /* White text on hover */
+}
+
+.active .page-link {
+    background-color: #007bff; /* Background color for active page */
+    color: white; /* White text for active page */
+}
+
+.disabled .page-link {
+    color: #cccccc1b; /* Grey color for disabled links */
+    pointer-events: none; /* Disable click on disabled */
+}
+
+
+select {
+    width: 100%; /* Полная ширина для селекта */
+    padding: 10px; /* Отступы внутри селекта */
+    border: 1px solid #ccc; /* Светлый бордер */
+    border-radius: 4px; /* Закругление углов */
+    font-size: 16px; /* Размер шрифта */
+}

@@ -1,0 +1,9 @@
+<nav> 
+    <a href="{% url "website:index" %}">Home</a> 
+    <a href="{% url "users:profile" %}">My Profile</a> 
+    <a href="{% url "website:myposts" %}">My Posts</a> 
+    <form method="POST" action="{% url 'users:logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" style="background: none; border: none; color: #fff; cursor: pointer;" onclick="confirmLogout(event)" >Logout</button>
+    </form>
+</nav> 

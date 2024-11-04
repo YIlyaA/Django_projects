@@ -1,0 +1,56 @@
+{% load static %}
+{% load url_tags %}
+
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content= 
+        "width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="{% static "css/style.css" %}" />
+    <title>Blogging Website</title> 
+    <link rel="stylesheet" href="{% static 'css/notifications.css' %}" />
+    <script src="{% static 'js/notifications.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</head> 
+    {% include "includes/notifications.html" %}
+
+<body> 
+    
+    {% include "website/includes/header.html" %}
+    {% include "website/includes/nav.html" %}
+
+    <main>
+        {% block content %}{% endblock content %} 
+
+    </main>
+    
+    <footer> 
+        {% if page_obj %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center my-4">
+                <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                    <a class="page-link" href="{% if page_obj.has_previous %}?{% change_params page=page_obj.previous_page_number %}{% else %}#{% endif %}">Previous</a>
+                </li>
+    
+                {% for page in page_obj.paginator.page_range %}
+                    {% if page <= page_obj.number|add:2 and page >= page_obj.number|add:-2 %}
+                    <li class="page-item {% if page_obj.number == page %} active {% endif %}">
+                        <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+    
+                <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                    <a class="page-link" href="{% if page_obj.has_next %}?{% change_params page=page_obj.next_page_number %}{% else %}#{% endif %}">Next</a>
+                </li>
+            </ul>
+        </nav>
+        {% endif %}
+        
+        <p>© 2024 Blog. All rights reserved.</p> 
+    </footer> 
+</body> 
+
+</html>

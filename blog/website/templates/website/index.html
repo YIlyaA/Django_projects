@@ -1,0 +1,31 @@
+{% extends "website/base.html" %}
+
+{% block content %}
+    <div class="container"> 
+        <main> 
+            {% for post in page_obj %}
+                <article> 
+                    <h2>{{ post.title }}</h2> 
+                    <p class="post-meta italic"> 
+                        Published on {{ post.created_at|date:"F d, Y" }} by {{ post.user }} <br>
+                        {% if post.updated_at and post.updated_at != post.created_at %}
+                            Updated on {{ post.updated_at|date:"F d, Y, h:m:s" }} 
+                        {% endif %}
+                    </p>  
+                    <p class="article-content"> 
+                        {{ post.content|linebreaks }}
+                    </p> 
+                </article> 
+            {% endfor %}
+        </main> 
+
+        <aside> 
+            <h2>Recent Posts</h2> 
+            <ul> 
+                {% for post in posts|slice:":5" %}
+                    <li><a href="#">{{ post.title }}</a></li> 
+                {% endfor %}
+            </ul> 
+        </aside> 
+    </div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Registration | Login Form </title>
+  <link rel="stylesheet" href="{% static "css/login_register.css" %} ">
+  <link rel="stylesheet" href="{% static 'css/notifications.css' %}" />
+  <script src="{% static 'js/notifications.js' %}"></script>
+</head>
+<body>
+  {% include "includes/notifications.html" %}
+
+  {% block content %}{% endblock content %}
+</body>
+</html>

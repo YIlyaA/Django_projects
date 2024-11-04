@@ -1,0 +1,33 @@
+{% extends "website/base.html" %}
+
+{% block content %}
+<div class="container"> 
+    <main> 
+        {% for post in page_obj %}
+            <article> 
+                <h2>{{ post.title }}</h2> 
+                <p class="post-meta italic"> 
+                    Published on {{ post.created_at|date:"F d, Y" }} by {{ post.user }} <br>
+                    {% if post.updated_at and post.updated_at != post.created_at %}
+                        Updated on {{ post.updated_at|date:"F d, Y, h:m:s" }} 
+                    {% endif %}
+                </p>
+                <p class="article-content"> 
+                    {{ post.content|linebreaks|truncatechars:100 }}  <!-- Отображаем весь текст с новыми стилями -->
+                </p> 
+                <div class="button-group">
+                    <a href="{% url "website:update" post.id %}" class="btn update-btn">Update post</a>
+                    <form action="{% url "website:delete" post.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" href="{% url "website:delete" post.id %}" class="btn delete-btn" onclick="confirmDelete(event, this)">Delete post</button>
+                    </form>
+                </div>
+            </article> 
+        {% endfor %}
+    </main> 
+
+    <aside> 
+        <a href="{% url "website:create" %}" class="btn publish-btn">Publish new post</a>
+    </aside> 
+</div>
+{% endblock content %}
