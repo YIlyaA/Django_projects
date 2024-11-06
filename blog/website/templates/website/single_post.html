@@ -2,8 +2,6 @@
 {% load static %}
 
 {% block content %}
-  <!DOCTYPE html>
-  <html>
     <head>
       <title>{{ post.title }}</title>
       <style>
@@ -16,15 +14,15 @@
         }
         
         .container {
-          display: flex; /* Use flexbox for layout */
-          justify-content: space-between; /* Space between main content and comments section */
-          width: 80%; /* Width of the entire container */
+          display: flex;
+          flex-direction: column; /* Stack elements vertically */
+          max-width: 600px; /* Set a maximum width for the form */
           margin: 20px auto; /* Center the container */
-          background-color: #fff; /* Background for the container */
-          padding: 20px; /* Padding inside the container */
-          border-radius: 10px; /* Rounded corners */
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
-        }
+          padding: 20px; /* Padding around the container */
+          background-color: #fff; /* Background color */
+          border-radius: 8px; /* Rounded corners */
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+      }
         
         .main-content {
           flex: 1; /* Allow this to grow and take up available space */
@@ -204,5 +202,4 @@
         </div>
       </div>
     </body>
-  </html>
 {% endblock %}

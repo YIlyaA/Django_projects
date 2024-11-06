@@ -1,4 +1,6 @@
+
 {% extends "website/base.html" %}
+{% load url_tags %}
 
 {% block content %}
     <div class="container"> 
@@ -13,7 +15,7 @@
                         {% endif %}
                     </p>  
                     <p class="article-content"> 
-                        {{ post.content|linebreaks|truncatechars:400 }} <br><br>
+                        {{ post.content|break_long_words:20|truncatechars:400|linebreaks }} <br><br>
                         Comments: {{ post.number_of_comments }} <br>
                         Likes: {{ post.likes }}  <br>
                         Dislikes: {{ post.dislikes }}

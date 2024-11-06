@@ -45,8 +45,8 @@ nav a {
 .container {
     display: flex; /* Используем Flexbox для расположения элементов */
     max-width: 1200px; /* Максимальная ширина контейнера */
-    width: 100%; /* Ширина контейнера 100% */
-    margin: 0 auto; /* Центрирует контейнер */
+    width: 80%;; /* Ширина контейнера 100% */
+    margin: 20px auto; /* Центрирует контейнер */
     padding: 20px; /* Внутренние отступы */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень контейнера */
     border-radius: 5px; /* Закругление углов */
@@ -61,8 +61,13 @@ article {
 }
 
 .article-content {
-    line-height: 1.5; /* Высота строки для улучшенной читаемости */
-    overflow-wrap: break-word; /* Перенос слов, если они длинные */
+    line-height: 1.5; /* Improve readability */
+    white-space: normal; /* Allow wrapping */
+    max-width: 100%; /* Prevent overflow */
+    margin: 0 auto; /* Center content */
+    padding: 10px; /* Add some padding for aesthetics */
+    hyphens: auto; /* Enable hyphenation */
+    overflow: hidden; /* Prevent content from overflowing */
 }
 
 main {
