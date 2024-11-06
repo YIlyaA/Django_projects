@@ -5,7 +5,7 @@
         <main> 
             {% for post in page_obj %}
                 <article> 
-                    <h2>{{ post.title }}</h2> 
+                    <h2><a href="{% url "website:detail" post.id %}">{{ post.title }}</a></h2> 
                     <p class="post-meta italic"> 
                         Published on {{ post.created_at|date:"F d, Y" }} by {{ post.user }} <br>
                         {% if post.updated_at and post.updated_at != post.created_at %}
@@ -13,7 +13,8 @@
                         {% endif %}
                     </p>  
                     <p class="article-content"> 
-                        {{ post.content|linebreaks }}
+                        {{ post.content|linebreaks|truncatechars:400 }} <br><br>
+                        Comments: {{ post.number_of_comments }} <br>+
                     </p> 
                 </article> 
             {% endfor %}

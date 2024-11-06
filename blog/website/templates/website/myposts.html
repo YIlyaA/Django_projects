@@ -13,7 +13,8 @@
                     {% endif %}
                 </p>
                 <p class="article-content"> 
-                    {{ post.content|linebreaks|truncatechars:100 }}  <!-- Отображаем весь текст с новыми стилями -->
+                    {{ post.content|linebreaks|truncatechars:400 }} <br><br>
+                    Comments: {{ post.number_of_comments }}
                 </p> 
                 <div class="button-group">
                     <a href="{% url "website:update" post.id %}" class="btn update-btn">Update post</a>

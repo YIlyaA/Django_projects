@@ -1,10 +1,10 @@
-from django.views.generic import TemplateView, UpdateView
+from django.views.generic import TemplateView, UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import DeleteView, CreateView
-from .models import BlogItems
+from .models import BlogItems, BlogComment
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .forms import PostForm
+from .forms import PostForm, NewCommentForm
 from .mixins import PaginatedViewMixin
 
 
@@ -18,6 +18,33 @@ class AllItemsView(PaginatedViewMixin, LoginRequiredMixin, TemplateView):
         items = BlogItems.objects.all()  # Fetch all blog items
         context["page_obj"] = self.paginate_queryset(items, self.paginate_by)
         return context
+
+
+class BlogPostDetailView(DetailView):
+    model = BlogItems
+    template_name = "website/single_post.html"
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        comments_connected = BlogComment.objects.filter(
+            blogpost_connected=self.get_object()
+        ).order_by("-date_posted")
+        data["post"] = self.object
+        data["comments"] = comments_connected
+        if self.request.user.is_authenticated:
+            data["comment_form"] = NewCommentForm(instance=self.request.user)
+
+        return data
+
+    def post(self, request, *args, **kwargs):
+        new_comment = BlogComment(
+            content=request.POST.get("content"),
+            author=self.request.user,
+            blogpost_connected=self.get_object(),
+        )
+        new_comment.save()
+        return self.get(self, request, *args, **kwargs)
 
 
 class MyPostsView(PaginatedViewMixin, LoginRequiredMixin, TemplateView):

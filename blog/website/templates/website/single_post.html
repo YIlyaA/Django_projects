@@ -1,0 +1,180 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>{{ post.title }}</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f9f9f9;
+          color: #333;
+          margin: 0;
+          padding: 0;
+        }
+        
+        .container {
+          display: flex; /* Use flexbox for layout */
+          justify-content: space-between; /* Space between main content and comments section */
+          width: 80%; /* Width of the entire container */
+          margin: 20px auto; /* Center the container */
+          background-color: #fff; /* Background for the container */
+          padding: 20px; /* Padding inside the container */
+          border-radius: 10px; /* Rounded corners */
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        }
+        
+        .main-content {
+          flex: 1; /* Allow this to grow and take up available space */
+          padding-right: 20px; /* Space between content and comments */
+          overflow-wrap: break-word; /* Break long words to prevent overflow */
+          word-wrap: break-word; /* Ensure wrapping for long words */
+        }
+        
+        h1,
+        h2 {
+          color: #333;
+          text-align: center; /* Centered text */
+        }
+        
+        p {
+          font-size: 1.1em;
+          line-height: 1.6; /* Improved line spacing */
+        }
+        
+        #comments_section {
+          margin-top: 40px; /* Space above comments section */
+          display: flex;
+          flex-direction: column; /* Stack items vertically */
+          align-items: flex-end; /* Align items to the right */
+          width: 300px; /* Fixed width for comments section */
+          margin-left: 20px; /* Space between main content and comments section */
+        }
+        
+        #comments_section h2 {
+          text-align: center; /* Center the heading */
+          width: 100%; /* Ensure it takes the full width */
+        }
+        
+        .form-group {
+          display: flex;
+          flex-direction: column; /* Stack elements vertically */
+          width: 100%; /* Full width */
+        }
+        
+        textarea {
+          resize: vertical; /* Allow vertical resizing only */
+          min-height: 100px; /* Minimum height */
+          width: 100%; /* Full width */
+          border: 1px solid #ccc; /* Border for the textarea */
+          border-radius: 5px; /* Rounded corners */
+          padding: 10px; /* Padding inside the textarea */
+          margin-top: 10px; /* Space from the heading */
+          box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+        
+        ul {
+          list-style: none; /* Remove default list styling */
+          padding: 0; /* Remove padding */
+          width: 100%; /* Ensures the ul takes the full width */
+          text-align: right; /* Aligns comments text to the right */
+        }
+        
+        li {
+          border-bottom: 1px solid #ccc; /* Separator between comments */
+          padding: 10px 0; /* Padding for each comment */
+          width: 100%; /* Ensures each comment takes the full width */
+          overflow-wrap: break-word; /* Break long comments to prevent overflow */
+        }
+        
+        .text-info {
+          color: #007bff; /* Blue color for author text */
+        }
+        
+        .text-secondary {
+          color: #6c757d; /* Grey color for secondary text */
+        }
+        
+        .text-muted {
+          color: #868e96; /* Even lighter grey for muted text */
+        }
+        
+        .btn {
+          display: inline-block;
+          padding: 10px 20px;
+          font-size: 1em;
+          color: #fff;
+          background-color: #007bff;
+          border: none;
+          border-radius: 5px;
+          text-decoration: none;
+          cursor: pointer;
+          transition: background-color 0.3s; /* Smooth color transition */
+        }
+        
+        .btn:hover {
+          background-color: #0056b3; /* Darker shade on hover */
+        }
+        
+        .btn-outline-info {
+          background-color: transparent; /* Transparent background */
+          color: #007bff; /* Blue text */
+          border: 2px solid #007bff; /* Blue border */
+          padding: 8px 15px; /* Padding for the button */
+        }
+        
+        .btn-outline-info:hover {
+          background-color: #007bff; /* Blue background on hover */
+          color: #fff; /* White text on hover */
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="main-content">
+          <div>
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.content|linebreaks }}</p>
+          </div>
+        </div>
+
+        <div id="comments_section">
+          <h2>Leave your comment!</h2>
+
+          {% if user.is_authenticated %}
+            <form method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <textarea name="content" placeholder="Write your comment here..." required></textarea> <!-- Placeholder for user guidance -->
+                <button class="btn" type="submit">Add comment <i class="fas fa-comments"></i></button>
+              </div>
+            </form>
+          {% else %}
+            <a class="btn btn-outline-info" href="{% url 'login' %}?next={{ request.path }}">Log in to add a comment!</a><br />
+          {% endif %}
+
+          {% if comments %}
+            <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong>
+            <hr />
+            <ul>
+              {% for comment in comments %}
+                <li>
+                  <div>
+                    <span>
+                      <strong class="text-info">{{ comment.author }}</strong>
+                      <small class="text-muted">{{ comment.date_posted }}</small>
+                    </span>
+                    <p>{{ comment.content|safe }}</p>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <strong class="text-secondary">No comments yet...</strong>
+          {% endif %}
+        </div>
+      </div>
+    </body>
+  </html>
+{% endblock %}
