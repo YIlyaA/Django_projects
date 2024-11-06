@@ -1,4 +1,5 @@
 {% extends 'website/base.html' %}
+{% load static %}
 
 {% block content %}
   <!DOCTYPE html>
@@ -137,6 +138,31 @@
             <h1>{{ post.title }}</h1>
             <p>{{ post.content|linebreaks }}</p>
           </div>
+
+          <!-- likes form -->
+          <form method="POST" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="like" />
+            <div class="form-group">
+                <button class="btn {% if user_liked %}btn-danger{% else %}btn-outline-info{% endif %}" type="submit">
+                    <img src="{% static 'img/like.png' %}" alt="Like" style="width: 20px; height: 20px;" /> Like
+                </button>
+            </div>
+          </form>
+
+          <!-- dislikes form -->
+          <form method="POST" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="dislike" />
+            <div class="form-group">
+                <button class="btn {% if user_disliked %}btn-danger{% else %}btn-outline-info{% endif %}" type="submit">
+                    <img src="{% static 'img/dislike.png' %}" alt="Dislike" style="width: 20px; height: 20px;" /> Dislike
+                </button>
+            </div>
+          </form>
+
+          <strong class="text-secondary">{{ post.likes }} Like{{ post.likes|pluralize }}</strong>
+          <strong class="text-secondary">{{ post.dislikes }} Dislike{{ post.dislikes|pluralize }}</strong>
         </div>
 
         <div id="comments_section">
@@ -151,11 +177,13 @@
               </div>
             </form>
           {% else %}
-            <a class="btn btn-outline-info" href="{% url 'login' %}?next={{ request.path }}">Log in to add a comment!</a><br />
+            <a class="btn btn-outline-info" href="{% url 'users:login' %}?next={{ request.path }}">Log in to add a comment!</a><br />
           {% endif %}
 
           {% if comments %}
-            <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong>
+            <strong class="text-secondary">{{ post.number_of_comments }} Comment{{ post.number_of_comments|pluralize }}</strong>
+            <strong class="text-secondary">{{ post.likes }} Like{{ post.likes|pluralize }}</strong>
+            <strong class="text-secondary">{{ post.dislikes }} Dislike{{ post.dislikes|pluralize }}</strong>
             <hr />
             <ul>
               {% for comment in comments %}
