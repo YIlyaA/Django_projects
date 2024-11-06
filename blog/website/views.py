@@ -4,7 +4,7 @@ from django.views.generic.edit import DeleteView, CreateView
 from .models import BlogItems, BlogComment
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .forms import PostForm, NewCommentForm
+from .forms import PostForm
 from .mixins import PaginatedViewMixin
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -21,7 +21,7 @@ class AllItemsView(PaginatedViewMixin, LoginRequiredMixin, TemplateView):
         return context
 
 
-class BlogPostDetailView(DetailView):
+class BlogPostDetailView(PaginatedViewMixin, DetailView):
     model = BlogItems
     template_name = "website/single_post.html"
 
@@ -36,12 +36,15 @@ class BlogPostDetailView(DetailView):
         user_disliked = (
             request.user in post.disliked_by.all()
         )  # Check if the user has disliked the post
+
+        paginated_comments = self.paginate_queryset(comments, self.paginate_by)
+
         return render(
             request,
             "website/single_post.html",
             {
                 "post": post,
-                "comments": comments,
+                "comments": paginated_comments,
                 "user_liked": user_liked,
                 "user_disliked": user_disliked,
             },

@@ -2,12 +2,6 @@ from django import forms
 from .models import BlogItems, BlogComment
 
 
-class NewCommentForm(forms.ModelForm):
-    class Meta:
-        model = BlogComment
-        fields = ['content']
-    
-
 class PostForm(forms.ModelForm):
     class Meta:
         model = BlogItems
