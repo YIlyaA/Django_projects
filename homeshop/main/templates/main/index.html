@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block modal_cart %}
+{% include "includes/cart_button.html" %}
+{% endblock modal_cart %}
+
+{% block title %}
+<title>Home</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href= {% static "deps/css/my_footer_css.css" %}>
+{% endblock %}
+
+
+<!-- Контент -->
+ {% block content %}
+    <h1 class="mt-5 pt-5"><strong>{{title}}</strong></h1>
+ {% endblock %}
+
+ {% block footer %}
+    <footer class="py-4 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio 2023</p>
+        </div>
+    </footer>
+ {% endblock %}
