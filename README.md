@@ -70,3 +70,36 @@
   ```
   5. You can now access the application at `http://127.0.0.1:8000/account/login/`
 </details>
+
+<details>
+<summary><h2><bold>3. Home Furniture store:</bold></h2></summary>
+
+   The app allows users to browse and search for a wide variety of furniture products, view product details, and manage a shopping cart. It includes features like user authentication, order management. Admin functionality enables efficient inventory management, product listings, and order tracking.
+
+  1. **Install Dependencies**:
+   Use Pipenv to manage your environment:
+   ```bash
+   pipenv shell
+   pipenv install
+  ```
+  2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
+  ```
+  SECRET_KEY=django-insecure-1&cf6w&mwq7@-h^@jx=mbn)xwj=jw^@l!^j6!9&bw6%=$5!&lz
+  DEBUG=True
+  ALLOWED_HOSTS=localhost,127.0.0.1
+  DATABASE_URL=db.sqlite3
+  ```
+  3. **Apply Migrations**: Run the following commands to apply database migrations:
+  ```
+  python manage.py migrate
+  ```
+  4. **Create a Superuser**: Create a superuser to access the Django admin panel:
+  ```
+  python manage.py createsuperuser
+  ```
+  4. **Run the Development Server**: Start the development server:
+  ```
+  python manage.py runserver
+  ```
+  5. You can now access the application at `http://127.0.0.1:8000/`
+</details>
