@@ -23,7 +23,7 @@ def index(request):
         if counter >= 4:
             City.objects.filter(name=city).delete()
             continue
-        url = "http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=YOUR_TOKEN"
+        url = "http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=53294b3b0a37da5ccf0f7a5833d7ecb0"
         city_weather = requests.get(
             url.format(city)
         ).json()  # request the API data and convert the JSON to Python data types
