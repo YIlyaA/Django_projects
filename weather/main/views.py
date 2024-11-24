@@ -2,6 +2,7 @@ from django.shortcuts import render
 import requests
 from .forms import CityForm
 from .models import City
+import os
 
 
 def index(request):
@@ -23,9 +24,9 @@ def index(request):
         if counter >= 4:
             City.objects.filter(name=city).delete()
             continue
-        url = "http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=53294b3b0a37da5ccf0f7a5833d7ecb0"
+        url = "http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid={}"
         city_weather = requests.get(
-            url.format(city)
+            url.format(city, os.environ.get("API_KEY"))
         ).json()  # request the API data and convert the JSON to Python data types
         if city_weather["cod"] == "404":
             City.objects.filter(name=city).delete()
