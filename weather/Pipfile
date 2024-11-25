@@ -9,6 +9,8 @@ python-decouple = "*"
 requests = "*"
 gunicorn = "*"
 dj-database-url = "*"
+mysqlclient = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 

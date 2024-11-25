@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'weather.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL', default='sqlite:///db.sqlite3')
+        default=config('DATABASE_URL')
     )
 }
 
