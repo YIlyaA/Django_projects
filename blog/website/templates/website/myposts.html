@@ -1,4 +1,5 @@
 {% extends "website/base.html" %}
+{% load url_tags %}
 
 {% block content %}
 <div class="container"> 
@@ -12,9 +13,11 @@
                         Updated on {{ post.updated_at|date:"F d, Y, h:m:s" }} 
                     {% endif %}
                 </p>
-                <p class="article-content"> 
-                    {{ post.content|linebreaks|truncatechars:100 }}  <!-- Отображаем весь текст с новыми стилями -->
-                </p> 
+                <p class="article-content">
+                    {{ post.content|break_long_words:20|truncatechars:400|linebreaks }}
+                    <br><br>
+                    Comments: {{ post.number_of_comments }}
+                </p>
                 <div class="button-group">
                     <a href="{% url "website:update" post.id %}" class="btn update-btn">Update post</a>
                     <form action="{% url "website:delete" post.id %}" method="post">

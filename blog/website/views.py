@@ -1,11 +1,12 @@
-from django.views.generic import TemplateView, UpdateView
+from django.views.generic import TemplateView, UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import DeleteView, CreateView
-from .models import BlogItems
+from .models import BlogItems, BlogComment
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .forms import PostForm
 from .mixins import PaginatedViewMixin
+from django.shortcuts import render, redirect, get_object_or_404
 
 
 class AllItemsView(PaginatedViewMixin, LoginRequiredMixin, TemplateView):
@@ -18,6 +19,91 @@ class AllItemsView(PaginatedViewMixin, LoginRequiredMixin, TemplateView):
         items = BlogItems.objects.all()  # Fetch all blog items
         context["page_obj"] = self.paginate_queryset(items, self.paginate_by)
         return context
+
+
+class BlogPostDetailView(PaginatedViewMixin, DetailView):
+    model = BlogItems
+    template_name = "website/single_post.html"
+
+    def get(self, request, pk):
+        post = get_object_or_404(BlogItems, pk=pk)
+        comments = BlogComment.objects.filter(blogpost_connected=post).order_by(
+            "-date_posted"
+        )
+        user_liked = (
+            request.user in post.liked_by.all()
+        )  # Check if the user has liked the post
+        user_disliked = (
+            request.user in post.disliked_by.all()
+        )  # Check if the user has disliked the post
+
+        paginated_comments = self.paginate_queryset(comments, self.paginate_by)
+
+        return render(
+            request,
+            "website/single_post.html",
+            {
+                "post": post,
+                "comments": paginated_comments,
+                "user_liked": user_liked,
+                "user_disliked": user_disliked,
+            },
+        )
+
+    def post(self, request, pk):
+        post = get_object_or_404(BlogItems, pk=pk)
+        if "content" in request.POST:
+            new_comment = BlogComment(
+                content=request.POST.get("content"),
+                author=request.user,
+                blogpost_connected=post,
+            )
+            new_comment.save()
+            return redirect("website:detail", pk=pk)
+
+        # Handle likes
+        if request.POST.get("action") == "like":
+            if request.user in post.liked_by.all():
+                post.likes -= 1
+                post.liked_by.remove(request.user)
+            else:
+                # Remove dislike if exists
+                if request.user in post.disliked_by.all():
+                    post.dislikes -= 1
+                    post.disliked_by.remove(request.user)
+
+                post.likes += 1
+                post.liked_by.add(request.user)
+            post.save()
+            return redirect("website:detail", pk=pk)
+
+        # Handle dislikes
+        if request.POST.get("action") == "dislike":
+            if request.user in post.disliked_by.all():
+                post.dislikes -= 1
+                post.disliked_by.remove(request.user)
+            else:
+                # Remove like if exists
+                if request.user in post.liked_by.all():
+                    post.likes -= 1
+                    post.liked_by.remove(request.user)
+
+                post.dislikes += 1
+                post.disliked_by.add(request.user)
+            post.save()
+            return redirect("website:detail", pk=pk)
+
+        comments = BlogComment.objects.filter(blogpost_connected=post).order_by(
+            "-date_posted"
+        )
+        return render(
+            request,
+            "website/single_post.html",
+            {
+                "post": post,
+                "comments": comments,
+            },
+        )
 
 
 class MyPostsView(PaginatedViewMixin, LoginRequiredMixin, TemplateView):

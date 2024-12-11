@@ -1,11 +1,13 @@
+
 {% extends "website/base.html" %}
+{% load url_tags %}
 
 {% block content %}
     <div class="container"> 
         <main> 
             {% for post in page_obj %}
                 <article> 
-                    <h2>{{ post.title }}</h2> 
+                    <h2><a href="{% url "website:detail" post.id %}">{{ post.title }}</a></h2> 
                     <p class="post-meta italic"> 
                         Published on {{ post.created_at|date:"F d, Y" }} by {{ post.user }} <br>
                         {% if post.updated_at and post.updated_at != post.created_at %}
@@ -13,7 +15,10 @@
                         {% endif %}
                     </p>  
                     <p class="article-content"> 
-                        {{ post.content|linebreaks }}
+                        {{ post.content|break_long_words:20|truncatechars:400|linebreaks }} <br><br>
+                        Comments: {{ post.number_of_comments }} <br>
+                        Likes: {{ post.likes }}  <br>
+                        Dislikes: {{ post.dislikes }}
                     </p> 
                 </article> 
             {% endfor %}
@@ -23,7 +28,7 @@
             <h2>Recent Posts</h2> 
             <ul> 
                 {% for post in posts|slice:":5" %}
-                    <li><a href="#">{{ post.title }}</a></li> 
+                    <li><a href="{% url 'website:detail' post.id %}">{{ post.title }}</a></li>
                 {% endfor %}
             </ul> 
         </aside> 
