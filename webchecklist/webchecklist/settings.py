@@ -1,8 +1,6 @@
 from pathlib import Path
 from decouple import config
 
-from django.conf.global_settings import STATICFILES_DIRS
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
