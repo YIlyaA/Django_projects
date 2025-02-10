@@ -16,7 +16,7 @@
   ```
   2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
   ```
-  SECRET_KEY=django-insecure-1&cf6w&mwq7@-h^@jx=mbn)xwj=jw^@l!^j6!9&bw6%=$5!&lz
+  SECRET_KEY=YOUR_SECRET_KEY
   DEBUG=True
   ALLOWED_HOSTS=localhost,127.0.0.1
   DATABASE_URL=db.sqlite3
@@ -51,7 +51,7 @@
   ```
   2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
   ```
-  SECRET_KEY=django-insecure-1&cf6w&mwq7@-h^@jx=mbn)xwj=jw^@l!^j6!9&bw6%=$5!&lz
+  SECRET_KEY=YOUR_SECRET_KEY
   DEBUG=True
   ALLOWED_HOSTS=localhost,127.0.0.1
   DATABASE_URL=db.sqlite3
@@ -84,10 +84,49 @@
   ```
   2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
   ```
-  SECRET_KEY=django-insecure-1&cf6w&mwq7@-h^@jx=mbn)xwj=jw^@l!^j6!9&bw6%=$5!&lz
+  SECRET_KEY=YOUR_SECRET_KEY
   DEBUG=True
   ALLOWED_HOSTS=localhost,127.0.0.1
   DATABASE_URL=db.sqlite3
+  ```
+  3. **Apply Migrations**: Run the following commands to apply database migrations:
+  ```
+  python manage.py migrate
+  ```
+  4. **Create a Superuser**: Create a superuser to access the Django admin panel:
+  ```
+  python manage.py createsuperuser
+  ```
+  4. **Run the Development Server**: Start the development server:
+  ```
+  python manage.py runserver
+  ```
+  5. You can now access the application at `http://127.0.0.1:8000/`
+</details>
+
+<details>
+<summary><h2><bold>4. Ultimate Web Security Checklist:</bold></h2></summary>
+
+   This project is a secure web application built with Django, designed with best practices for user authentication and data protection. It includes robust security features such as reCAPTCHA, two-factor authentication (2FA), and session management. Below are the key functionalities implemented.
+
+  1. **Install Dependencies**:
+   Create Python virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate (Linux/MacOS)
+   venv\Scripts\activate (Windows)
+   ----------------------------------------
+   (venv) $ pip install -r requirements.txt
+  ``` 
+  2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
+  ```
+  SECRET_KEY=YOUR_SECRET_KEY
+  DEBUG=True
+  ALLOWED_HOSTS=localhost,127.0.0.1
+  DATABASE_URL=db.sqlite3
+
+  RECAPTCHA_PUBLIC_KEY=YOUR_RECAPTCHA_PUBLIC_KEY
+  RECAPTCHA_PRIVATE_KEY=YOUR_RECAPTCHA_PRIVATE_KEY
   ```
   3. **Apply Migrations**: Run the following commands to apply database migrations:
   ```
