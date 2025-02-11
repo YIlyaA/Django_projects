@@ -1,5 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Dashboard</h1>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white justify-content-center">
+    <a class="navbar-brand main-heading" href="{% url 'dashboard' %}"> 
+    &nbsp; SecureX 
+    </a>
+</nav>
+<br>
+<div class="container bg-white shadow-md p-5 form-layout">
+    <h2> Welcom {{user}} </h2>
+    <p> This is the dashboard </p>
+    <hr>
+    <a class="btn btn-info" type="button"  href="{% url 'user-logout' %}">Logout</a>
+</div>
+<br>
+<div class="container bg-white shadow-md p-5 form-layout">
+    <h2> Abour SecureX </h2>
+    <p> SecureX is the most secure website in the world </p>
+</div>
+<br>
+<div class="container bg-white shadow-md p-5 form-layout">
+    <h2> 2FA </h2>
+    <p> Two-factor authentication provides users with extra security </p>
+    <hr>
+    <a class="btn btn-danger py-1 mb-2" type="button"  href="{% url 'two_factor:setup' %}">Enable 2FA</a>
+    <br>
+    <a class="btn btn-primary py-1" type="button"  href="{% url 'two_factor:profile' %}">2FA account settings</a>
+</div>
+<br>
+
+{{ redirect_to_login_immediately }}
+
 {% endblock content %}

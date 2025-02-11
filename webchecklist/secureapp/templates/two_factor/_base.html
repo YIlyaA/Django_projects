@@ -1,0 +1,41 @@
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <title> SecureX | Login </title>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width-device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/lux/bootstrap.min.css">
+
+
+</head>
+
+<style type="text/css">
+  body {
+    background-color: #f0f0f0;
+  }
+</style>
+
+<!-- Messages -->
+
+<br>
+
+<body>
+  {% block content_wrapper %}
+  <div class="container">
+    {% block content %} {% endblock %}
+  </div>
+  {% endblock %}
+</body>
+<script src="{% static 'js/app.js' %}"></script>
+
+</html>

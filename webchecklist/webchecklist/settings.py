@@ -17,15 +17,15 @@ INSTALLED_APPS = [
 
     'django_recaptcha',
 
+    "crispy_forms",
+    "crispy_bootstrap5",
+
+    'secureapp',
+
     'django_otp',
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
     'two_factor',
-
-    "crispy_forms",
-    "crispy_bootstrap5",
-
-    'secureapp'
 ]
 
 MIDDLEWARE = [
@@ -37,6 +37,7 @@ MIDDLEWARE = [
     'django_otp.middleware.OTPMiddleware',                         # 2FA
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_auto_logout.middleware.auto_logout',    # session timeout
 ]
 
 ROOT_URLCONF = 'webchecklist.urls'
@@ -52,6 +53,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'django_auto_logout.context_processors.auto_logout_client',  # auto logout
             ],
         },
     },
@@ -83,7 +86,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -106,3 +109,11 @@ RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 # LOGIN SETUP for 2FA
 LOGIN_URL = 'two_factor:login'
 LOGIN_REDIRECT_URL = 'dashboard'
+
+# auto logout
+from datetime import timedelta
+
+AUTO_LOGOUT = {
+    'IDLE_TIME': timedelta(minutes=10),
+    'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
+}
