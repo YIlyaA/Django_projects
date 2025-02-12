@@ -23,9 +23,12 @@
 
             {{captcha}}
 
-            <br>
-
             <button type="submit" class="btn btn-info w-100 btn-lock p-3">Create your account</button>
+
+            <br><br>
+            <div class="text-center">
+                <p> Already have an account? </p> <a href="{% url "two_factor:login" %}"> Login </a>
+            </div>
 
         </form>
 

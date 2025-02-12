@@ -122,9 +122,10 @@ LOGIN_REDIRECT_URL = 'dashboard'
 # auto logout
 from datetime import timedelta
 
-AUTO_LOGOUT = {
+AUTO_LOGOUT = { 
     'IDLE_TIME': timedelta(minutes=10),
     'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
+    'MESSAGE': 'The session has expired. Please login again to continue.',
 }
 
 
