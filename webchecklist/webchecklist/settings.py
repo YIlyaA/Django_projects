@@ -148,3 +148,25 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+
+
+
+'''
+# check django for deployment security
+# $ python manage.py check --deploy 
+
+# Pre deployment security options
+#CSRF protection
+SESSION_COOCKIE_SECURE = True
+CSRF_COOKIES_SECURE = True
+
+# SSL redirect
+SECURE_SSL_REDIRECT = True
+
+# Enable HSTS
+SECURE_HSTS_SECONDS = 86400
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# Look into a CSP (Content Security Policy)
+'''
