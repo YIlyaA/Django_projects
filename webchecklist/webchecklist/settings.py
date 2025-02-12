@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
     'two_factor',
+
+    'axes',  # prevent brutte-force attacks
 ]
 
 MIDDLEWARE = [
@@ -38,6 +40,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_auto_logout.middleware.auto_logout',    # session timeout
+    'axes.middleware.AxesMiddleware',   # axes
+]
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 ROOT_URLCONF = 'webchecklist.urls'
@@ -117,3 +126,12 @@ AUTO_LOGOUT = {
     'IDLE_TIME': timedelta(minutes=10),
     'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
 }
+
+
+# Axes configuration
+AXES_FAILURE_LIMIT: 3  # max 3 times a user can fail a login
+AXES_COOLOFF_TIME: 2   # wait 2 hours before attempting to login again
+AXES_RESET_ON_SUCCESS = True # Reset failed login attempts
+AXES_LOCKOUT_TEMPLATE = 'account-locked.html'  # Custom template
+
+AXES_LOCKOUT_PARAMETERS = ["username"]

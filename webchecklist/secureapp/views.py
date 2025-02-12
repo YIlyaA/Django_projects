@@ -33,3 +33,7 @@ def user_logout(request):
     auth.logout(request)
 
     return redirect("")
+
+
+def account_locked(request):
+    return render(request, "account-locked.html")
