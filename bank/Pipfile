@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+python-dotenv = "*"
+djangorestframework = "*"
+django-countries = "*"
+django-phonenumber-field = "*"
+phonenumbers = "*"
+drf-spectacular = "*"
+pillow = "*"
+argon2-cffi = "*"
+djoser = "*"
+django-filter = "*"
+django-celery-email = "*"
+django-celery-beat = "*"
+cloudinary = "*"
+python-dateutil = "*"
+psycopg2-binary = "*"
+
+[dev-packages]
+watchfiles = "*"
+black = "*"
+
+[requires]
+python_version = "3.12"
