@@ -1,21 +1,45 @@
 from pathlib import Path
+from django.conf.global_settings import INSTALLED_APPS, STATIC_ROOT
+from dotenv import load_dotenv
+from os import getenv, path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent   # moving three levels up from its location and set it as BASE_DIR
 
-SECRET_KEY = 'django-insecure-f%wu%2bzq*03)a2x&l76y!nlpww6a5bqy90rax7ygxve4fyuf7'
+APPS_DIR = BASE_DIR / 'core_apps'
 
-DEBUG = True
+local_env_file = path.join(BASE_DIR, '.envs', ".env.local")
 
-ALLOWED_HOSTS = []
+if path.isfile(local_env_file):
+    load_dotenv(local_env_file)
 
-INSTALLED_APPS = [
+
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # allow to manage multiple webistes or domains using a single django project
+    'django.contrib.humanize',  # provides a set of template filters to help format data a more human readable format
 ]
+
+THIRD_PARTY_APPS = [
+    'rest_framework',
+    'django_countries',
+    'phonenumber_field'
+    'drf_spectacular',
+    'djoser',
+    'cloudinary',
+    'django_filters',
+    'djcelery_email',
+    'django_celery_beat',
+]
+
+LOCAL_APPS = []
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -32,7 +56,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(APPS_DIR / 'templates')],  # set the templates directory into apps directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -53,6 +77,16 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# Argon hashing
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -77,6 +111,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+
+SITE_ID = 1
+
+
+STATIC_URL = '/static/'
+STATIC_ROOT = str(BASE_DIR / 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
