@@ -8,32 +8,37 @@
 
    https://github.com/user-attachments/assets/1a31712b-cb53-4a63-a1c1-38e082b7a7c2
 
-  1. **Install Dependencies**:
+   1. **Install Dependencies**:
    Use Pipenv to manage your environment:
-   ```bash
-   pipenv shell
-   pipenv install
-  ```
-  2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
-  ```
-  SECRET_KEY=YOUR_SECRET_KEY
-  DEBUG=True
-  ALLOWED_HOSTS=localhost,127.0.0.1
-  DATABASE_URL=db.sqlite3
-  ```
-  3. **Apply Migrations**: Run the following commands to apply database migrations:
-  ```
-  python manage.py migrate
-  ```
-  4. **Create a Superuser**: Create a superuser to access the Django admin panel:
-  ```
-  python manage.py createsuperuser
-  ```
-  4. **Run the Development Server**: Start the development server:
-  ```
-  python manage.py runserver
-  ```
-  5. You can now access the application at `http://127.0.0.1:8000/login/`
+      ```bash
+      pipenv shell
+      pipenv install
+      ```
+      
+   2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
+      ```
+      SECRET_KEY=YOUR_SECRET_KEY
+      DEBUG=True
+      ALLOWED_HOSTS=localhost,127.0.0.1
+      DATABASE_URL=db.sqlite3
+      ```
+      
+   3. **Apply Migrations**: Run the following commands to apply database migrations:
+      ```
+      python manage.py migrate
+      ```
+      
+   4. **Create a Superuser**: Create a superuser to access the Django admin panel:
+      ```
+      python manage.py createsuperuser
+      ```
+      
+   4. **Run the Development Server**: Start the development server:
+      ```
+      python manage.py runserver
+      ```
+      
+   5. You can now access the application at `http://127.0.0.1:8000/login/`
 </details>
 
 <details>
@@ -45,30 +50,35 @@
 
    1. **Install Dependencies**:
    Use Pipenv to manage your environment:
-   ```bash
-   pipenv shell
-   pipenv install
-  ```
-  2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
-  ```
-  SECRET_KEY=YOUR_SECRET_KEY
-  DEBUG=True
-  ALLOWED_HOSTS=localhost,127.0.0.1
-  DATABASE_URL=db.sqlite3
-  ```
-  3. **Apply Migrations**: Run the following commands to apply database migrations:
-  ```
-  python manage.py migrate
-  ```
-  4. **Create a Superuser**: Create a superuser to access the Django admin panel:
-  ```
-  python manage.py createsuperuser
-  ```
-  4. **Run the Development Server**: Start the development server:
-  ```
-  python manage.py runserver
-  ```
-  5. You can now access the application at `http://127.0.0.1:8000/account/login/`
+      ```bash
+      pipenv shell
+      pipenv install
+      ```
+      
+   2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
+      ```
+      SECRET_KEY=YOUR_SECRET_KEY
+      DEBUG=True
+      ALLOWED_HOSTS=localhost,127.0.0.1
+      DATABASE_URL=db.sqlite3
+      ```
+      
+   3. **Apply Migrations**: Run the following commands to apply database migrations:
+      ```
+      python manage.py migrate
+      ```
+      
+   4. **Create a Superuser**: Create a superuser to access the Django admin panel:
+      ```
+      python manage.py createsuperuser
+      ```
+      
+   4. **Run the Development Server**: Start the development server:
+      ```
+      python manage.py runserver
+      ```
+      
+   5. You can now access the application at `http://127.0.0.1:8000/account/login/`
 </details>
 
 <details>
@@ -76,32 +86,37 @@
 
    The app allows users to browse and search for a wide variety of furniture products, view product details, and manage a shopping cart. It includes features like user authentication, order management. Admin functionality enables efficient inventory management, product listings, and order tracking.
 
-  1. **Install Dependencies**:
+   1. **Install Dependencies**:
    Use Pipenv to manage your environment:
-   ```bash
-   pipenv shell
-   pipenv install
-  ```
-  2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
-  ```
-  SECRET_KEY=YOUR_SECRET_KEY
-  DEBUG=True
-  ALLOWED_HOSTS=localhost,127.0.0.1
-  DATABASE_URL=db.sqlite3
-  ```
-  3. **Apply Migrations**: Run the following commands to apply database migrations:
-  ```
-  python manage.py migrate
-  ```
-  4. **Create a Superuser**: Create a superuser to access the Django admin panel:
-  ```
-  python manage.py createsuperuser
-  ```
-  4. **Run the Development Server**: Start the development server:
-  ```
-  python manage.py runserver
-  ```
-  5. You can now access the application at `http://127.0.0.1:8000/`
+      ```bash
+      pipenv shell
+      pipenv install
+      ```
+      
+   2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
+      ```
+      SECRET_KEY=YOUR_SECRET_KEY
+      DEBUG=True
+      ALLOWED_HOSTS=localhost,127.0.0.1
+      DATABASE_URL=db.sqlite3
+      ```
+      
+   3. **Apply Migrations**: Run the following commands to apply database migrations:
+      ```
+      python manage.py migrate
+      ```
+      
+   4. **Create a Superuser**: Create a superuser to access the Django admin panel:
+      ```
+      python manage.py createsuperuser
+      ```
+      
+   4. **Run the Development Server**: Start the development server:
+      ```
+      python manage.py runserver
+      ```
+      
+   5. You can now access the application at `http://127.0.0.1:8000/`
 </details>
 
 <details>
@@ -109,36 +124,69 @@
 
    This project is a secure web application built with Django, designed with best practices for user authentication and data protection. It includes robust security features such as reCAPTCHA, two-factor authentication (2FA), and session management. Below are the key functionalities implemented.
 
-  1. **Install Dependencies**:
+   1. **Install Dependencies**:
    Create Python virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate (Linux/MacOS)
-   venv\Scripts\activate (Windows)
-   ----------------------------------------
-   (venv) $ pip install -r requirements.txt
-  ``` 
-  2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
-  ```
-  SECRET_KEY=YOUR_SECRET_KEY
-  DEBUG=True
-  ALLOWED_HOSTS=localhost,127.0.0.1
-  DATABASE_URL=db.sqlite3
-
-  RECAPTCHA_PUBLIC_KEY=YOUR_RECAPTCHA_PUBLIC_KEY
-  RECAPTCHA_PRIVATE_KEY=YOUR_RECAPTCHA_PRIVATE_KEY
-  ```
+      ```bash
+      python -m venv venv
+      source venv/bin/activate (Linux/MacOS)
+      venv\Scripts\activate (Windows)
+      ----------------------------------------
+      (venv) $ pip install -r requirements.txt
+      ```
+      
+   2. **Configure Environment Variables**: Create a .env file in the root of your project and fill it with the following example content:
+      ```
+      SECRET_KEY=YOUR_SECRET_KEY
+      DEBUG=True
+      ALLOWED_HOSTS=localhost,127.0.0.1
+      DATABASE_URL=db.sqlite3
+   
+      RECAPTCHA_PUBLIC_KEY=YOUR_RECAPTCHA_PUBLIC_KEY
+      RECAPTCHA_PRIVATE_KEY=YOUR_RECAPTCHA_PRIVATE_KEY
+      ```
+      
   3. **Apply Migrations**: Run the following commands to apply database migrations:
-  ```
-  python manage.py migrate
-  ```
-  4. **Create a Superuser**: Create a superuser to access the Django admin panel:
-  ```
-  python manage.py createsuperuser
-  ```
-  4. **Run the Development Server**: Start the development server:
-  ```
-  python manage.py runserver
-  ```
-  5. You can now access the application at `http://127.0.0.1:8000/`
+      ```python
+      python manage.py migrate
+      ```
+
+   4. **Create a Superuser**: Create a superuser to access the Django admin panel:
+      ```python
+      python manage.py createsuperuser
+      ```
+
+   4. **Run the Development Server**: Start the development server:
+      ```python
+      python manage.py runserver
+      ```
+
+   5. You can now access the application at `http://127.0.0.1:8000/`
+</details>
+
+<details>
+<summary><h2><bold>5. Banking APIs using Django:</bold></h2></summary>
+
+   A production-ready Banking API built with Django and modern best practices. This project implements secure and scalable features including user authentication with JWT and two-factor authentication, KYC verification, real-time transactions, multi-currency support, virtual card creation, fraud detection, and automated PDF statement generation. Leveraging Docker, Celery, Redis, RabbitMQ, PostgreSQL, and NGINX, it demonstrates robust transaction logging, rate limiting, and comprehensive error handling, making it a solid backbone for a digital banking platform.
+
+   1. **Install Dependencies**:
+   Create and Activate Python virtual environment:
+      ```bash
+      pipenv install
+      pipenv shell
+      ```
+
+   2. **Generate `SECRET_KEY`, `ADMIN_URL`, `POSTGRES_PASSWORD` using `secrets`:
+         ```python
+         python -c "import secrets; print(secrets.token_urlsafe(38))"
+         # '-c' allows you to execute python code directly from you command line
+         # 38 - size in bytes ~ 51 chars
+         # 'token_urlsafe' generate safe code without problematic symbols like '/', '+' 
+         ```
+
+   3. **Fill `.envs/.env.local` using as an example `.envs/.env.example`**
+      
+   5. Ensure that `setuptools` is updated
+      ```python
+      pip install --upgrade setuptools
+      ```
 </details>
