@@ -175,7 +175,7 @@
       pipenv shell
       ```
 
-   2. **Generate `SECRET_KEY`, `ADMIN_URL`, `POSTGRES_PASSWORD` using `secrets`:
+   2. **Generate `SECRET_KEY`, `ADMIN_URL`, `POSTGRES_PASSWORD`, `POSTGRES_USER` using `secrets`:
          ```python
          python -c "import secrets; print(secrets.token_urlsafe(38))"
          # '-c' allows you to execute python code directly from you command line
