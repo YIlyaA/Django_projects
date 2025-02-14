@@ -1,5 +1,4 @@
 from pathlib import Path
-from django.conf.global_settings import INSTALLED_APPS, STATIC_ROOT
 from dotenv import load_dotenv
 from os import getenv, path
 
@@ -27,7 +26,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'django_countries',
-    'phonenumber_field'
+    'phonenumber_field',
     'drf_spectacular',
     'djoser',
     'cloudinary',

@@ -1,8 +1,4 @@
-from os import getenv, path
-from unittest.mock import DEFAULT    # for production
-from django.conf.global_settings import EMAIL_BACKEND, EMAIL_HOST, EMAIL_PORT
-import djcelery_email
-import djcelery_email.backends
+from os import getenv, path       # for production
 from dotenv import load_dotenv    # for local testing .env file
 from .base import * # noqa
 from .base import BASE_DIR
