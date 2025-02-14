@@ -20,6 +20,7 @@ django-celery-beat = "*"
 cloudinary = "*"
 python-dateutil = "*"
 psycopg2-binary = "*"
+loguru = "*"
 
 [dev-packages]
 watchfiles = "*"

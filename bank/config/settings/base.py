@@ -1,6 +1,7 @@
 from pathlib import Path
 from dotenv import load_dotenv
 from os import getenv, path
+from loguru import logger
 
 BASE_DIR = (
     Path(__file__).resolve(strict=True).parent.parent.parent
@@ -80,8 +81,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": BASE_DIR / getenv("POSTGRES_DB"),
+        "USER": BASE_DIR / getenv("POSTGRES_USER"),
+        "PASSWORD": BASE_DIR / getenv("POSTGRES_PASSWORD"),
+        "HOST": BASE_DIR / getenv("POSTGRES_HOST"),
+        "PORT": BASE_DIR / getenv("POSTGRES_PORT"),
     }
 }
 
@@ -126,3 +131,54 @@ STATIC_URL = "/static/"
 STATIC_ROOT = str(BASE_DIR / "staticfiles")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Loguru setup for advanced logging
+LOGGIN_CONFIG = None  # disable the default Django logging configuration
+
+LOGURU_LOGGING = {
+    # "handlers": ["console"],   # responsible for dispatching log messages to the appropriate destinations (console output,files email,external services)
+    # LOGURU: TRACE(5), DEBUG(10), INFO(20), SUCCESS(25), WARNING(30), ERROR(40), CRITICAL(50)
+    "handlers": [
+        {
+            "sink": BASE_DIR
+            / "logs/debug.log",  # This log file will only be responsible for displaying log records with log levels of debug info and warning
+            "level": "DEBUG",  # log everything (info, success and warning)
+            "filter": lambda record: record["level"].no
+            <= logger.level(
+                "WARNING"
+            ).no,  # log file will include the debug info and warning logs, but exclude error and critical logs
+            "format": "{time:YYYY-MM-DD at HH:mm:ss.SSS} | {level:<8} | {name}:{function}:{line} - {message}",
+            "rotation": "10MB",  # when the log file gets to ten megabytes in size, split it and create a new one.
+            "retention": "30 days",  # keep the log files for 30 days before deleting them
+            "compression": "zip",  # compress the old log files using the zip format
+        },
+        {
+            "sink": BASE_DIR
+            / "logs/error.log",  # This log file will only be responsible for displaying log records with log levels of error and critical
+            "level": "ERROR",  # log error and critical logs only
+            "format": "{time:YYYY-MM-DD at HH:mm:ss.SSS} | {level:<8} | {name}:{function}:{line} - {message}",
+            "rotation": "10MB",
+            "retention": "30 days",
+            "compression": "zip",
+            "backtrace": True,  # include the stack trace of the exception that caused the error
+            "diagnose": True,  # include the exception type and message
+        },
+    ],
+}
+
+logger.configure(**LOGURU_LOGGING)
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,  # existing loggers will not be disabled.
+    "handlers": {
+        "loguru": {
+            "class": "interceptor.interceptHandler",
+        },
+    },
+    "root": {
+        "handlers": ["loguru"],
+        "level": "DEBUG",
+    },
+}
