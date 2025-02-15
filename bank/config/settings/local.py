@@ -1,6 +1,6 @@
 from os import getenv, path       # for production
 from dotenv import load_dotenv    # for local testing .env file
-from .base import * # noqa
+from .base import *               # noqa
 from .base import BASE_DIR
 
 
