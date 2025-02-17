@@ -1,4 +1,4 @@
-
+# Docker
 ### Before we can build the containers, let's confirm that these services are able to get these environment variable files:
 ```docker compose -f local.yml config```
 <hr>
@@ -6,9 +6,9 @@
 ### Build containers:
 ```docker compose -f local.yml up --build -d --remove-orphans```
 ```bash
---build           // build images before running the containers
--d                // run containers in the background
---remove-orphans  // remove containers for services not defined in the compose file.
+--build           # build images before running the containers
+-d                # run containers in the background
+--remove-orphans  # remove containers for services not defined in the compose file.
 ```
 <hr>
 
@@ -26,4 +26,20 @@
 <hr>
 
 ### Bring down containers:
-```docker compose -f local.yml down```
+```bash
+docker compose -f local.yml down
+docker compose -f local.yml down -v  # bring down our containers and remove any associated volumes.
+```
+
+<hr>
+<hr>
+<br>
+
+# Postgres
+### Commads
+```bash
+\list      #  list available db
+\connect   # connect to db
+\dt        # show the tables in db
+\q         # exit
+```
