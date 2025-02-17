@@ -1,4 +1,5 @@
 from pathlib import Path
+from django.conf.global_settings import AUTH_USER_MODEL
 from dotenv import load_dotenv
 from os import getenv, path
 from loguru import logger
@@ -132,6 +133,7 @@ STATIC_URL = "/static/"
 STATIC_ROOT = str(BASE_DIR / "staticfiles")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+AUTH_USER_MODEL = "user_auth.User"
 
 
 # Loguru setup for advanced logging
