@@ -1,4 +1,6 @@
-from os import getenv, path       # for production
+from os import getenv, path
+import time       # for production
+from django.conf.global_settings import CSRF_TRUSTED_ORIGINS
 from dotenv import load_dotenv    # for local testing .env file
 from .base import *               # noqa
 from .base import BASE_DIR
@@ -27,3 +29,12 @@ DEFAULT_FROM_EMAIL = getenv('DEFAULT_FROM_EMAIL')
 DOMAIN = getenv('DOMAIN')
 
 MAX_UPLOAD_SIZE = 1 * 1024 * 1024   # 1MB
+
+
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8080"]
+
+LOCKOUT_DURATION = timedelta(minutes=1)
+LOGIN_ATTEMPTS = 3
+OTP_EXPIRETION = timedelta(minutes=1)
+
+
