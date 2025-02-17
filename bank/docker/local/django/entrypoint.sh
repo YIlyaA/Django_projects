@@ -4,14 +4,14 @@
 set -o errexit
 
 # exit if pipline failed
-set -o pipfail
+set -o pipefail
 
 # exit if an uninitialized variable is used
 set -o nounset
 
 python << END
 
-import system
+import sys
 import time
 import psycopg2
 suggest_unrecoverable_after = 30
@@ -29,9 +29,10 @@ while True:
     except psycopg2.OperationalError as error:
         sys.stderr.write("Waiting for PostgreSQL to become available ... \n")
         if time.time() - start >= suggest_unrecoverable_after:
-            sys.stderr.write("This is taking longer than expexcted. The following exception 
-            indicative of an unrecoverable error: '{}'\n".format(error))
-            time.sleep(3)
+            sys.stderr.write(
+                "This is taking longer than expexcted. The following exception "
+                "indicative of an unrecoverable error: '{}'\n".format(error))
+        time.sleep(3)
 END
 
 echo >&2 'PostgreSQL is available'

@@ -31,7 +31,7 @@ services:
       - banker_local_nw
 
   mailpit:
-    image: docker.io/axllent/mailpit:1.20.3
+    image: docker.io/axllent/mailpit:v1.22
     ports:
       - "8025:8025"
       - "1025:1025"

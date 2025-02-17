@@ -4,7 +4,7 @@
 set -o errexit
 
 # exit if pipline failed
-set -o pipfail
+set -o pipefail
 
 # exit if an uninitialized variable is used
 set -o nounset

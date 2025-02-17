@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 COPY ./requirements .
 
-RUN pip wheel --wheel -dir /usr/src/app/wheels \
+RUN pip wheel --wheel-dir /usr/src/app/wheels \
     -r ${BUILD_ENVIRONMENT}.txt
 
 
@@ -40,7 +40,7 @@ RUN addgroup --system django && \
     chown django:django ${APP_HOME}/staticfiles && \
     chown 775 ${APP_HOME}/staticfiles
 
-COPY --from=python-build-stage /usr/src/app/wheels /wheels /wheels/
+COPY --from=python-build-stage /usr/src/app/wheels /wheels/
 
 RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
     && rm -rf /wheels/
