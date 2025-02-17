@@ -7,7 +7,7 @@ from click import Option
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import UserManager as DjangoUserManager
 from django.core.exceptions import ValidationError
-from djang.core.validators import validate_email
+from django.core.validators import validate_email
 from django.utils.translation import gettext_lazy as _
 
 def generate_username() -> str:
