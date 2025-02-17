@@ -135,6 +135,20 @@ STATIC_ROOT = str(BASE_DIR / "staticfiles")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "user_auth.User"
 
+# setup documentations for the API (DRF)
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+SPECTACULAR_SETTINGS = {
+    "TITLE": "NextGen Bank API",
+    "DESCRIPTION": "An API built for a banking system",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "LICENSE": {
+        "name": "MIT License",
+        "url": "https://opensource.org/license/MIT",
+    }
+}
 
 # Loguru setup for advanced logging
 LOGGIN_CONFIG = None  # disable the default Django logging configuration

@@ -14,7 +14,7 @@ banker-config:
 	docker compose -f local.yml config
 
 makemigrations:
-	docker compose -f local.yml run -rm api python manage.py makemigrations
+	docker compose -f local.yml run --rm api python manage.py makemigrations
 
 migrate:
 	docker compose -f local.yml run --rm api python manage.py migrate
