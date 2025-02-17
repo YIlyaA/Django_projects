@@ -25,7 +25,7 @@ def send_otp_email(email, otp):
         logger.exception(f"Failed to send OTP email to {email}: Error {str(e)}")
 
 
-def send_account_locked(self):
+def send_account_locked_email(self):
     subject = _('Your account has been locked')
     from_email = settings.DEFAULT_FROM_EMAIL
     recipient_list = [self.email]

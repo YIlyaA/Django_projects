@@ -35,6 +35,6 @@ CSRF_TRUSTED_ORIGINS = ["http://localhost:8080"]
 
 LOCKOUT_DURATION = timedelta(minutes=1)
 LOGIN_ATTEMPTS = 3
-OTP_EXPIRETION = timedelta(minutes=1)
+OTP_EXPIRATION = timedelta(minutes=1)
 
 
