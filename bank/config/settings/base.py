@@ -1,9 +1,7 @@
 from pathlib import Path
-from django.conf.global_settings import AUTH_USER_MODEL
 from dotenv import load_dotenv
 from os import getenv, path
 from loguru import logger
-from datetime import timedelta
 
 BASE_DIR = (
     Path(__file__).resolve(strict=True).parent.parent.parent

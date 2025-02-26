@@ -1,9 +1,9 @@
 from os import getenv, path
-import time       # for production
-from django.conf.global_settings import CSRF_TRUSTED_ORIGINS
+import time
 from dotenv import load_dotenv    # for local testing .env file
 from .base import *               # noqa
 from .base import BASE_DIR
+from datetime import timedelta
 
 
 local_env_file = path.join(BASE_DIR, '.envs', ".env.local")
