@@ -201,3 +201,22 @@ LOGGING = {
         "level": "DEBUG",
     },
 }
+
+
+# Celery configuration
+if USE_TZ:
+    CELERY_TIMEZONE = TIME_ZONE  # Set Celery's timezone to Django's timezone if timezones are enabled
+
+CELERY_BROKER_URL = getenv("CELERY_BROKER_URL")  # URL of the broker (e.g., Redis, RabbitMQ) to send tasks to
+CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND")  # URL of the backend to store task results
+CELERY_ACCEPT_CONTENT = ["application/json"]  # Only accept JSON content for tasks to ensure security
+CELERY_TASK_SERIALIZER = "json"  # Use JSON to serialize task data
+CELERY_RESULT_SERIALIZER = "json"  # Use JSON to serialize task results
+CELERY_RESULT_BACKEND_MAX_RETRIES = 10  # Maximum number of retries to store task results in the backend
+CELERY_TASK_SEND_SENT_EVENT = True  # Enable sending task-sent events for monitoring purposes
+CELERY_RESULTS_EXTENDED = True  # Enable extended task results with additional metadata (if supported)
+CELERY_RESULTS_BACKEND_ALWAYS_RETRY = True  # Always retry storing task results in the backend on failure
+CELERY_TASK_TIME_LIMIT = 5 * 60  # Hard time limit of 5 minutes for task execution
+CELERY_TASK_SOFT_TIME_LIMIT = 60  # Soft time limit of 60 seconds for task execution, triggering a warning before hard limit
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"  # Use Django Celery Beat's database scheduler for periodic tasks
+CELERY_WORKER_SEND_TASK_EVENTS = True  # Enable workers to send task-related events for monitoring and tracking
