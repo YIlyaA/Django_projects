@@ -5,9 +5,11 @@ services:
       dockerfile: ./docker/local/django/Dockerfile
     volumes:
       - .:/app:z
-      - ./static:/app/staticfiles
-    ports:
-      - "8000:8000"
+      - ./staticfiles:/app/staticfiles
+    # ports:
+    #   - "8000:8000"
+    expose:
+      - "8000"
     env_file:
       - ./.envs/.env.local
     depends_on:
@@ -44,6 +46,21 @@ services:
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
     networks:
       - banker_local_nw
+
+  nginx:
+    build:
+      context: ./docker/local/nginx
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./staticfiles:/app/staticfiles
+      - logs_store:/var/log/nginx
+    depends_on:
+      - api
+    networks:
+      - banker_local_nw
   
 networks:
   banker_local_nw:
@@ -52,3 +69,4 @@ networks:
 volumes:
   banker_local_db:
   banker_mailpit_db:
+  logs_store:
