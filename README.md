@@ -124,6 +124,13 @@
 
    This project is a secure web application built with Django, designed with best practices for user authentication and data protection. It includes robust security features such as reCAPTCHA, two-factor authentication (2FA), and session management. Below are the key functionalities implemented.
 
+   *Usefull links:*
+   - https://bootswatch.com
+   - https://getbootstrap.com/docs/5.0/customize/components/
+   - https://fontawesome.com/v4/get-started/
+   - https://fontawesome.com/icons
+----
+
    1. **Install Dependencies**:
    Create Python virtual environment:
       ```bash
