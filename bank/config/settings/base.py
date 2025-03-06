@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from os import getenv, path
 from loguru import logger
 import cloudinary
+from datetime import timedelta, date
 
 BASE_DIR = (
     Path(__file__).resolve(strict=True).parent.parent.parent
@@ -135,6 +136,11 @@ STATIC_ROOT = str(BASE_DIR / "staticfiles")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "user_auth.User"
+DEFAULT_BIRTH_DATE = date(1900, 1, 1)
+DEFAULT_DATE = date(2000, 1, 1)
+DEFAULT_EXPIRY_DATE = date(2024, 1, 1)
+DEFAULT_COUNTRY = "KE"
+DEFAULT_PHONE_NUMBER = "+250784123456"
 
 # setup documentations for the API (DRF)
 REST_FRAMEWORK = {
