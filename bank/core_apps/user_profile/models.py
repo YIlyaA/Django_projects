@@ -2,7 +2,7 @@ from typing import Any
 from cloudinary.models import CloudinaryField
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.conf.exceptions import ValidationError
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
@@ -143,7 +143,7 @@ class Profile(TimeStampedModel):
     )
     address = models.CharField(_("Address"), max_length=100, default="Unknown")
     city = models.CharField(_("City"), max_length=50, default="Unknown")
-    country = models.CountryField(_("Country"), default=settings.DEFAULT_COUNTRY)
+    country = CountryField(_("Country"), default=settings.DEFAULT_COUNTRY)
     employment_status = models.CharField(
         _("Employment Status"),
         max_length=20,
