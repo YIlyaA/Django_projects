@@ -189,6 +189,17 @@ cloudinary.config(
 )
 
 
+# Session configuration
+COOKIE_NAME = "access"
+# prevent csrf attacks
+COOKIE_SAMESITE = "Lax"
+# Cookie available for all the paths under the domain
+COOKIE_PATH = "/"
+# COOKIE cant be accessd or modified by JavaScript
+COOKIE_HTTPONLY = True
+COOKIE_SECURE = getenv("COOKIE_SECURE", "True") == "True"
+
+
 # Loguru setup for advanced logging
 LOGGIN_CONFIG = None  # disable the default Django logging configuration
 
