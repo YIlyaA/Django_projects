@@ -10,6 +10,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
 CSRF_TRUSTED_ORIGINS = [ 'https://*' ]
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -65,7 +66,13 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'a_core.wsgi.application'
+ASGI_APPLICATION = 'a_core.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 DATABASES = {
     'default': {
