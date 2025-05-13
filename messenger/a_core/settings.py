@@ -68,10 +68,19 @@ TEMPLATES = [
 
 ASGI_APPLICATION = 'a_core.asgi.application'
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("localhost", 6379)],
+#         },
+#     },
+# }
+
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
-    },
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    }
 }
 
 DATABASES = {

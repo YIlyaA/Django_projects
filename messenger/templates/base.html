@@ -103,6 +103,15 @@
         .alert-success { @apply bg-green-500 }
         .alert-warning { @apply bg-red-500 }
         .alert-danger { @apply bg-red-500 }
+        .green-dot {
+            @apply rounded-full bg-green-500 p-1.5
+        }
+        .gray-dot {
+            @apply rounded-full bg-gray-500 p-1.5
+        }
+        .graylight-dot {
+            @apply rounded-full bg-gray-300 p-1.5
+        }
     </style>
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="{% block class %}{% endblock %}">
