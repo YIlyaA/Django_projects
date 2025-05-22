@@ -22,6 +22,15 @@
                     <ul class="hoverlist [&>li>a]:justify-end">
                         <li><a href="{% url 'home' %}">Public Chat</a></li>
                         {% for chatroom in user.chat_groups.all %}
+                            {% if chatroom.groupchat_name %}
+                            <li>
+                                <a class="leading-5 text-right" href="{% url "chatroom" chatroom.group_name %}">
+                                    {{chatroom.groupchat_name|slice:":30"}}
+                                </a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                        {% for chatroom in user.chat_groups.all %}
                             {% if chatroom.is_private %}
                                 {% for member in chatroom.membres.all %}
                                     {% if member != user %}
@@ -49,6 +58,7 @@
                     <ul class="hoverlist [&>li>a]:justify-end">
                         <li><a href="{% url 'profile' %}">My Profile</a></li>
                         <li><a href="{% url 'profile-edit' %}">Edit Profile</a></li>
+                        <li><a href="{% url 'new-groupchat' %}">Create Chat</a></li>
                         <li><a href="{% url 'profile-settings' %}">Settings</a></li>
                         <li><a href="{% url 'account_logout' %}">Log Out</a></li>
                     </ul>
