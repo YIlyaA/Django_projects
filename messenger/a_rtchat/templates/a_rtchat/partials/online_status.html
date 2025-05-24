@@ -26,7 +26,7 @@
     {% for chatroom in user.chat_groups.all %}
         {% if chatroom.groupchat_name %}
         <li class="relative">
-            {% if chatroom.users_online.all and user not in chatroom.users_online.all %}
+            {% if chatroom.users_online.all and user not in chatroom.users_online.all or chatroom.users_online.count > 1 %}
             <div class="green-dot absolute top-1 left-1"></div>
             {% else %}
             <div class="graylight-dot absolute top-1 left-1"></div>
