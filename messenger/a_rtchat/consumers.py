@@ -136,6 +136,8 @@ class OnlineStatusConsumer(WebsocketConsumer):
         context = {
             "online_users": online_users,
             "online_in_chats": online_in_chats,
+            "public_chat_users": public_chat_users,
+            "user": self.user,
         }
         html = render_to_string("a_rtchat/partials/online_status.html", context=context)
         self.send(text_data=html)
