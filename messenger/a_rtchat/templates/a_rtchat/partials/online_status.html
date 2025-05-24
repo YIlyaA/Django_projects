@@ -25,7 +25,12 @@
     </li>
     {% for chatroom in user.chat_groups.all %}
         {% if chatroom.groupchat_name %}
-        <li>
+        <li class="relative">
+            {% if chatroom.users_online.all and user not in chatroom.users_online.all %}
+            <div class="green-dot absolute top-1 left-1"></div>
+            {% else %}
+            <div class="graylight-dot absolute top-1 left-1"></div>
+            {% endif %}
             <a class="leading-5 text-right" href="{% url "chatroom" chatroom.group_name %}">
                 {{chatroom.groupchat_name|slice:":30"}}
             </a>
