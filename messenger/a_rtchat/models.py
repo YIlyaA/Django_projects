@@ -1,6 +1,10 @@
+import os
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 import shortuuid
+from PIL import Image
+
+User = get_user_model()
 
 
 class ChatGroup(models.Model):
@@ -28,11 +32,29 @@ class GroupMessage(models.Model):
         ChatGroup, related_name="chat_messages", on_delete=models.CASCADE
     )
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.CharField(max_length=300)
+    body = models.CharField(max_length=300, blank=True, null=True)
+    file = models.FileField(upload_to="files/", blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def filename(self):
+        if self.file:
+            return os.path.basename(self.file.name)
+        return None
+
     def __str__(self):
-        return f"{self.author.username}: {self.body}"
+        if self.body:
+            return f"{self.author.username}: {self.body}"
+        elif self.file:
+            return f"{self.author.username}: {self.filename}"
 
     class Meta:
         ordering = ["-created"]
+
+    def is_image(self):
+        try:
+            image = Image.open(self.file)
+            image.verify()
+            return True
+        except Exception:
+            return False
